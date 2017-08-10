@@ -1,16 +1,18 @@
 package ru.job4j;
 
-/*
- *Class Calculate решение задачи части 001 урок1.
- *@author Stanislav
- *@since 10.08.2017
-*/
+/**
+ * Calculate.
+ *
+ * @author Stanislav (376825@mail.ru)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Calculate {
-	/*
-	*Конструктор, вывод строки в консоль.
-	*@param arg - arg.
-	*/
-	public static void main(String[] args) {
-		System.out.println("Hello world.");
-	}
+    /**
+     * Main.
+     * @param args - args.
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
 }
