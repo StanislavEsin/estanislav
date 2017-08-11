@@ -10,11 +10,22 @@ package ru.job4j.max;
 public class Max {
     /**
      * max.
-     * @param first - double
-     * @param second - double
+     * @param first - int
+     * @param second - int
      * @return int
      */
     public int max(int first, int second) {
         return first > second ? first : second;
+    }
+
+    /**
+     * max.
+     * @param first - int
+     * @param second - int
+     * @param third - int
+     * @return int
+     */
+    public int max(int first, int second, int third) {
+        return max(max(first, second), third);
     }
 }
