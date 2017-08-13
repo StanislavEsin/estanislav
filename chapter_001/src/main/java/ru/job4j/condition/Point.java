@@ -48,6 +48,6 @@ public class Point {
      * @return boolean
      */
     public boolean is(int a, int b) {
-        return (a * this.getX() + b) <= (this.getX() + this.getY()) ? true : false;
+        return this.y == this.x * a + b;
     }
 }
