@@ -32,4 +32,39 @@ public class Utils {
         }
         return false;
     }
+
+    /**
+     * merge - cлияние двух упорядоченных массивов.
+     * @param arrayA - int[].
+     * @param arrayB - int[].
+     * @return return - merge int[].
+     */
+    public int[] merge(int[] arrayA, int[] arrayB) {
+        int[] result = new int[arrayA.length + arrayB.length];
+
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while (i < arrayA.length && j < arrayB.length) {
+            if (arrayA[i] < arrayB[j]) {
+                result[index] = arrayA[i];
+                i++;
+            } else {
+                result[index] = arrayB[j];
+                j++;
+            }
+            index++;
+        }
+
+        if (i < arrayA.length) {
+            System.arraycopy(arrayA, i, result, index, arrayA.length - i);
+        }
+
+        if (j < arrayB.length) {
+            System.arraycopy(arrayB, j, result, index, arrayB.length - j);
+        }
+
+        return result;
+    }
 }

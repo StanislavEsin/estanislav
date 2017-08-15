@@ -25,4 +25,19 @@ public class UtilsTest {
 
         assertThat(result, is(true));
     }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenTwoSortArrayThenMergeOne() {
+        Utils utils = new Utils();
+
+        int[] arrayA = {1, 2, 3, 5, 8};
+        int[] arrayB = {1, 4, 7, 30, 55};
+        int[] result = utils.merge(arrayA, arrayB);
+
+        int[] expected = {1, 1, 2, 3, 4, 5, 7, 8, 30, 55};
+        assertThat(result, is(expected));
+    }
 }
