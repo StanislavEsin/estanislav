@@ -9,7 +9,7 @@ import java.util.Date;
  * @version $Id$
  * @since 1.0
  */
-public class StartUi {
+public class StartUI {
     /**
      */
     private String[] menu;
@@ -46,7 +46,7 @@ public class StartUi {
      * @param input - Input
      * @param tracker - Tracker
      */
-    public StartUi(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
 
@@ -64,11 +64,21 @@ public class StartUi {
      * showMenu.
      */
     private void showMenu() {
+        clearConsole();
         System.out.println("---------------------");
         for (String positionMenu: this.menu) {
             System.out.println(positionMenu);
         }
         System.out.println("---------------------");
+    }
+
+    /**
+     * clearConsole.
+     */
+    private void clearConsole() {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) { }
     }
 
     /**
@@ -88,7 +98,7 @@ public class StartUi {
             if (inputIndex == ADD) {
                 createItem(this.input, this.tracker);
             } else if (inputIndex == SHOW) {
-                showAllItems(this.tracker);
+                showAllItems(this.input, this.tracker);
             } else if (inputIndex == EDIT) {
                 editItem(this.input, this.tracker);
             } else if (inputIndex == DELETE) {
@@ -118,9 +128,10 @@ public class StartUi {
 
     /**
      * showAllItems.
+     * @param input - Input
      * @param tracker - Tracker
      */
-    private void showAllItems(Tracker tracker) {
+    private void showAllItems(Input input, Tracker tracker) {
         Item[] findItems = tracker.getAll();
 
         for (Item item: findItems) {
@@ -129,6 +140,8 @@ public class StartUi {
                     + ", description: " + item.getDesc()
                     + ", created: " + new Date(item.getCreated()));
         }
+
+        input.ask("Press any key to return to the menu");
     }
 
     /**
@@ -164,6 +177,8 @@ public class StartUi {
                 + ", name: " + findItem.getName()
                 + ", description: " + findItem.getDesc()
                 + ", created: " + new Date(findItem.getCreated()));
+
+        input.ask("Press any key to return to the menu");
     }
 
     /**
@@ -181,6 +196,8 @@ public class StartUi {
                     + ", description: " + item.getDesc()
                     + ", created: " + new Date(item.getCreated()));
         }
+
+        input.ask("Press any key to return to the menu");
     }
 
     /**
@@ -188,6 +205,6 @@ public class StartUi {
      * @param args - String[]
      */
     public static void main(String[] args) {
-        new StartUi(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }
