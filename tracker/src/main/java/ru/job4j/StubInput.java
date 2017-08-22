@@ -1,4 +1,4 @@
-package ru.job4j.controller;
+package ru.job4j;
 
 /**
  * StubInput - используется для подмены ввода пользовательских данных из консоли.

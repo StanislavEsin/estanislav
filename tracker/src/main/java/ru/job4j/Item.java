@@ -1,6 +1,6 @@
-package ru.job4j.model;
+package ru.job4j;
 
-import java.util.Random;
+import java.util.Date;
 
 /**
  * Item - заявка.
@@ -13,7 +13,7 @@ public class Item {
     /**
      * генератор для id.
      */
-    private static final Random RN = new Random();
+    private static int nextId = 1;
 
     /**
      */
@@ -38,7 +38,7 @@ public class Item {
      * @param created - long
      */
     public Item(String name, String desc, long created) {
-        this.id = this.generateId();
+        this.id = String.valueOf(nextId++);
         this.name = name;
         this.desc = desc;
         this.created = created;
@@ -123,10 +123,22 @@ public class Item {
     }
 
     /**
-     * generateId - генерирует рэндомный Id.
-     * @return return - String
+     * setId.
+     * @param id - String
      */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * ask.
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "id: " + this.getId()
+                + ", name: " + this.getName()
+                + ", description: " + this.getDesc()
+                + ", created: " + new Date(this.getCreated());
     }
 }

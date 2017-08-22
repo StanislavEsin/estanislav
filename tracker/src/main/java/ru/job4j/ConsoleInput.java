@@ -1,4 +1,4 @@
-package ru.job4j.controller;
+package ru.job4j;
 
 import java.util.Scanner;
 
@@ -10,6 +10,11 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class ConsoleInput implements Input {
+    /**
+     * ask.
+     * @param question - String
+     * @return String
+     */
     @Override
     public String ask(String question) {
         System.out.print(question);
