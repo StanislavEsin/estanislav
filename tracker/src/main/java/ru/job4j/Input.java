@@ -16,4 +16,12 @@ public interface Input {
      * @return String
      */
     String ask(String question);
+
+    /**
+     * ask.
+     * @param question - String
+     * @param range - int[]
+     * @return int
+     */
+    int ask(String question, int[] range);
 }

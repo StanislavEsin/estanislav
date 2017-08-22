@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ConsoleInput implements Input {
     /**
      * ask.
+     *
      * @param question - String
      * @return String
      */
@@ -20,5 +21,30 @@ public class ConsoleInput implements Input {
         System.out.print(question);
         Scanner input = new Scanner(System.in);
         return input.nextLine();
+    }
+
+    /**
+     * ask.
+     *
+     * @param question - String
+     * @param range    - int[]
+     * @return int
+     */
+    @Override
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask("question"));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 }

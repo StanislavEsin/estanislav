@@ -30,8 +30,7 @@ public class StartUI {
 
         do {
             menu.show();
-            int key = Integer.valueOf(this.input.ask("Select: "));
-            menu.select(key);
+            menu.select(this.input.ask("Select: ", menu.getRanges()));
         } while (!("y".equals(this.input.ask("Exit?(y): "))));
     }
 
@@ -40,6 +39,6 @@ public class StartUI {
      * @param args - String[]
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput()).init();
+        new StartUI(new ValidateInput()).init();
     }
 }

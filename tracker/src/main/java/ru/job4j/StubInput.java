@@ -13,6 +13,10 @@ public class StubInput implements Input {
      */
     private String[] answers;
     /**
+     * массив то что вводит пользователь.
+     */
+    private int[] intAnswers;
+    /**
      */
     private int position = 0;
 
@@ -25,6 +29,14 @@ public class StubInput implements Input {
     }
 
     /**
+     * @see
+     * @param answers - String[]
+     */
+    public StubInput(int[] answers) {
+        this.intAnswers = answers;
+    }
+
+    /**
      * ask.
      * @param question - String
      * @return String
@@ -32,5 +44,17 @@ public class StubInput implements Input {
     @Override
     public String ask(String question) {
         return this.answers[this.position++];
+    }
+
+    /**
+     * ask.
+     *
+     * @param question - String
+     * @param range    - int[]
+     * @return int
+     */
+    @Override
+    public int ask(String question, int[] range) {
+        return this.intAnswers[this.position++];
     }
 }

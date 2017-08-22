@@ -62,6 +62,20 @@ public class MenuTracker {
     }
 
     /**
+     * getRanges.
+     * @return int[]
+     */
+    public int[] getRanges() {
+        int[] ranges = new int[actions.length];
+
+        for (int i = 0; i < actions.length; i++) {
+            ranges[i] = actions[i].key();
+        }
+
+        return ranges;
+    }
+
+    /**
      * AddNewItem.
      */
     private class AddNewItem implements UserAction {
