@@ -34,12 +34,19 @@ public class MenuTracker {
      * fillActions.
      */
     public void fillActions() {
-        this.actions[0] = new AddNewItem();
-        this.actions[1] = new ShowAllItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindItemById();
-        this.actions[5] = new FindItemsByName();
+        this.actions[0] = new AddNewItem("Add new Item", 1);
+        this.actions[1] = new ShowAllItems("Show all items", 2);
+        this.actions[2] = new EditItem("Edit item", 3);
+        this.actions[3] = new DeleteItem("Delete item", 4);
+        this.actions[4] = new BaseAction("Find item by Id", 5) {
+            @Override
+            public void execute(Input input, Tracker tracker) {
+                String id = input.ask("Enter id item: ");
+                Item findItem = tracker.findById(id);
+                System.out.println(findItem);
+            }
+        };
+        this.actions[5] = new FindItemsByName("Find items by name", 6);
     }
 
     /**
@@ -78,14 +85,14 @@ public class MenuTracker {
     /**
      * AddNewItem.
      */
-    private class AddNewItem implements UserAction {
+    private class AddNewItem extends BaseAction {
         /**
-         * ask.
-         * @return int
+         * @see
+         * @param name - String
+         * @param key - int
          */
-        @Override
-        public int key() {
-            return 1;
+        AddNewItem(String name, int key) {
+            super(name, key);
         }
 
         /**
@@ -101,28 +108,19 @@ public class MenuTracker {
             Item newItem = new Item(name, desc, new Date().getTime());
             tracker.add(newItem);
         }
-
-        /**
-         * ask.
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add new Item");
-        }
     }
 
     /**
      * ShowAllItems.
      */
-    private static class ShowAllItems implements UserAction {
+    private static class ShowAllItems extends BaseAction {
         /**
-         * ask.
-         * @return int
+         * @param name - String
+         * @param key  - int
+         * @see
          */
-        @Override
-        public int key() {
-            return 2;
+        ShowAllItems(String name, int key) {
+            super(name, key);
         }
 
         /**
@@ -138,28 +136,19 @@ public class MenuTracker {
                 System.out.println(item);
             }
         }
-
-        /**
-         * ask.
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all items");
-        }
     }
 
     /**
      * DeleteItem.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
         /**
-         * ask.
-         * @return int
+         * @param name - String
+         * @param key  - int
+         * @see
          */
-        @Override
-        public int key() {
-            return 4;
+        DeleteItem(String name, int key) {
+            super(name, key);
         }
 
         /**
@@ -174,63 +163,19 @@ public class MenuTracker {
 
             tracker.delete(findItem);
         }
-
-        /**
-         * ask.
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete item");
-        }
-    }
-
-    /**
-     * FindItemById.
-     */
-    private class FindItemById implements UserAction {
-        /**
-         * ask.
-         * @return int
-         */
-        @Override
-        public int key() {
-            return 5;
-        }
-
-        /**
-         * ask.
-         * @param input - Input
-         * @param tracker - Tracker
-         */
-        @Override
-        public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Enter id item: ");
-            Item findItem = tracker.findById(id);
-            System.out.println(findItem);
-        }
-
-        /**
-         * ask.
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by Id");
-        }
     }
 
     /**
      * FindItemsByName.
      */
-    private class FindItemsByName implements UserAction {
+    private class FindItemsByName extends BaseAction {
         /**
-         * ask.
-         * @return String
+         * @param name - String
+         * @param key  - int
+         * @see
          */
-        @Override
-        public int key() {
-            return 6;
+        FindItemsByName(String name, int key) {
+            super(name, key);
         }
 
         /**
@@ -247,29 +192,20 @@ public class MenuTracker {
                 System.out.println(item);
             }
         }
-
-        /**
-         * ask.
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find items by name");
-        }
     }
 }
 
 /**
  * EditItem.
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
     /**
-     * ask.
-     * @return String
+     * @param name - String
+     * @param key  - int
+     * @see
      */
-    @Override
-    public int key() {
-        return 3;
+    EditItem(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -287,14 +223,5 @@ class EditItem implements UserAction {
         Item item = new Item(name, desc, findItem.getCreated());
         item.setId(id);
         tracker.update(item);
-    }
-
-    /**
-     * ask.
-     * @return String
-     */
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit item");
     }
 }
