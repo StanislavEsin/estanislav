@@ -18,6 +18,7 @@
 		<module>chapter_002</module>
 		<module>tracker</module>
 		<module>chess_board</module>
+		<module>coin_change</module>
 	</modules>
 	
 	<dependencies>
