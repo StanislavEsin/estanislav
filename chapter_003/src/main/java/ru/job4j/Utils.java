@@ -34,7 +34,7 @@ public class Utils {
 
         for (int i = 0; i < arrayStatColl.size(); i++) {
             StatisticsCollection value = arrayStatColl.get(i);
-            System.out.println(String.format("%s. %s - %s милисекунд.",
+            System.out.println(String.format("%s. %s - %s миллисекунд.",
                     i + 1, value.getName(), value.getTimeAdd()));
         }
 
@@ -46,7 +46,7 @@ public class Utils {
 
         for (int i = 0; i < arrayStatColl.size(); i++) {
             StatisticsCollection value = arrayStatColl.get(i);
-            System.out.println(String.format("%s. %s - %s милисекунд.",
+            System.out.println(String.format("%s. %s - %s миллисекунд.",
                     i + 1, value.getName(), value.getTimeDelete()));
         }
     }
