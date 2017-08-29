@@ -19,9 +19,9 @@ public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
 
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                list.add(array[i][j]);
+        for (int[] row : array) {
+            for (int column : row) {
+                list.add(column);
             }
         }
 
@@ -38,14 +38,28 @@ public class ConvertList {
         int[][] array = new int[rows][rows];
 
         int currentRow = 1; int currentColumn = 1;
-        for (int i = 0; i < rows * rows; i++) {
-            array[currentRow - 1][currentColumn - 1] = i < list.size() ? list.get(i) : 0;
 
+        for (Integer value : list) {
+            array[currentRow - 1][currentColumn - 1] = value;
             if (currentColumn % rows == 0) {
                 currentRow++;
                 currentColumn = 1;
             } else {
                 currentColumn++;
+            }
+        }
+
+        if (currentRow != rows || currentColumn != rows) {
+            for (int i = currentRow; i <= rows; i++) {
+                for (int j = currentColumn; j <= rows; j++) {
+                    array[currentRow - 1][currentColumn - 1] = 0;
+                    if (currentColumn % rows == 0) {
+                        currentRow++;
+                        currentColumn = 1;
+                    } else {
+                        currentColumn++;
+                    }
+                }
             }
         }
 
