@@ -39,8 +39,8 @@ public class Elephant extends Figure {
      */
     @Override
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
-        int sourcePositionX = this.POSITION.getPositionX();
-        int sourcePositionY = this.POSITION.getPositionY();
+        int sourcePositionX = this.position.getPositionX();
+        int sourcePositionY = this.position.getPositionY();
 
         int dx = Math.abs(dist.getPositionX() - sourcePositionX);
         int dy = Math.abs(dist.getPositionY() - sourcePositionY);

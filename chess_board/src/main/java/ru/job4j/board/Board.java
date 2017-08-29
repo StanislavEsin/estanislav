@@ -49,7 +49,7 @@ public class Board {
 
         int i;
         for (i = 0; i < this.figures.length; i++) {
-            if (figures[i].POSITION.equals(source)) {
+            if (figures[i].position.equals(source)) {
                 figureSource = figures[i];
                 break;
             }
@@ -63,7 +63,7 @@ public class Board {
 
         for (Cell cellPath : path) {
             for (Figure figure: figures) {
-                if (cellPath.equals(figure.POSITION)) {
+                if (cellPath.equals(figure.position)) {
                     throw new OccupiedWayException("Received from the path is busy figures");
                 }
             }

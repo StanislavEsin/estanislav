@@ -41,7 +41,7 @@ public class BoardTest {
         Board board = new Board(figures);
 
         board.move(source, dist);
-        Cell result = board.getFigures()[0].POSITION;
+        Cell result = board.getFigures()[0].position;
 
         assertThat(result, is(dist));
     }

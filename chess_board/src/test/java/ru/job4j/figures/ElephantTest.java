@@ -62,6 +62,6 @@ public class ElephantTest {
 
         Figure result = elephant.clone(dist);
 
-        assertThat(result.POSITION, is(dist));
+        assertThat(result.position, is(dist));
     }
 }

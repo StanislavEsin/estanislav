@@ -13,14 +13,14 @@ import ru.job4j.exception.ImpossibleMoveException;
 public abstract class Figure {
     /**
      */
-    public final Cell POSITION;
+    public final Cell position;
 
     /**
      * @see
      * @param position - Cell.
      */
     public Figure(Cell position) {
-        this.POSITION = position;
+        this.position = position;
     }
 
     /**
