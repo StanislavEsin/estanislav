@@ -5,6 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,6 +47,22 @@ public class ConvertListTest {
         int[][] result = convertList.toArray(list, 3);
 
         int[][] expected = {{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenInListArrayThenListValue() {
+        List<int[]> list = new ArrayList<>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5, 6});
+        ConvertList convertList = new ConvertList();
+
+        List<Integer> result = convertList.convert(list);
+
+        List<Integer> expected = Arrays.asList(new Integer[] {1, 2, 3, 4, 5, 6});
         assertThat(result, is(expected));
     }
 }

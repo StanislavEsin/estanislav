@@ -65,4 +65,21 @@ public class ConvertList {
 
         return array;
     }
+
+    /**
+     * convert.
+     * @param list - List<int[]>
+     * @return return - List<Integer>
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> returnList = new ArrayList<>();
+
+        for (int[] valList : list) {
+            for (int valArray : valList) {
+                returnList.add(valArray);
+            }
+        }
+
+        return returnList;
+    }
 }
