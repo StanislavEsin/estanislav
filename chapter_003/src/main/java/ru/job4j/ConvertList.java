@@ -35,12 +35,17 @@ public class ConvertList {
      * @return return - int[][]
      */
     public int[][] toArray(List<Integer> list, int rows) {
+        List<Integer> tmpList = new ArrayList<>(list);
         int[][] array = new int[rows][rows];
 
         int currentRow = 1; int currentColumn = 1;
 
         for (Integer value : list) {
-            array[currentRow - 1][currentColumn - 1] = value;
+            if (currentRow > rows) {
+                break;
+            }
+
+            array[currentRow - 1][currentColumn - 1] = value == null ? 0 : value;
             if (currentColumn % rows == 0) {
                 currentRow++;
                 currentColumn = 1;

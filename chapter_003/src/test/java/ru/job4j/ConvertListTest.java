@@ -54,6 +54,28 @@ public class ConvertListTest {
      * Test add.
      */
     @Test
+    public void whenListWithNullThenTwoDimensionalArray() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                list.add(null);
+                continue;
+            }
+            list.add(i);
+        }
+
+        ConvertList convertList = new ConvertList();
+
+        int[][] result = convertList.toArray(list, 3);
+
+        int[][] expected = {{0, 1, 0}, {3, 0, 5}, {0, 7, 0}};
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
     public void whenInListArrayThenListValue() {
         List<int[]> list = new ArrayList<>();
         list.add(new int[]{1, 2});
