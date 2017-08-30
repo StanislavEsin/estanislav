@@ -35,7 +35,6 @@ public class ConvertList {
      * @return return - int[][]
      */
     public int[][] toArray(List<Integer> list, int rows) {
-        List<Integer> tmpList = new ArrayList<>(list);
         int[][] array = new int[rows][rows];
 
         int currentRow = 1; int currentColumn = 1;
