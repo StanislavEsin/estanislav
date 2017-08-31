@@ -1,6 +1,7 @@
 package ru.job4j;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * MenuTracker.
@@ -130,11 +131,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item[] findItems = tracker.getAll();
+            List<Item> findItems = tracker.getAll();
 
-            for (Item item: findItems) {
-                System.out.println(item);
-            }
+            findItems.forEach(System.out::println);
         }
     }
 
@@ -186,11 +185,9 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Enter name item: ");
-            Item[] findItems = tracker.findByName(name);
+            List<Item> findItems = tracker.findByName(name);
 
-            for (Item item: findItems) {
-                System.out.println(item);
-            }
+            findItems.forEach(System.out::println);
         }
     }
 }
