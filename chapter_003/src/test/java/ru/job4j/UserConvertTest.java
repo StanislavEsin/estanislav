@@ -23,7 +23,7 @@ public class UserConvertTest {
     public void whenListUsersThenMapUsers() {
         List<User> listUsers = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
-            listUsers.add(new User(i, String.format("name_%s", i), String.format("city_%s", i)));
+            listUsers.add(new User(i, String.format("name_%s", i), String.format("city_%s", i), i));
         }
 
         HashMap<Integer, User> result = new UserConvert().process(listUsers);
