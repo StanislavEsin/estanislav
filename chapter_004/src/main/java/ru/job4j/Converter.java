@@ -16,13 +16,24 @@ public class Converter {
      */
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
+            private Iterator<Integer> currentIterator = null;
+
             @Override
             public boolean hasNext() {
-                return it.hasNext();
+                return currentIterator.hasNext() || it.hasNext();
             }
+
             @Override
             public Integer next() {
-                return it.next().next();
+                if (currentIterator == null || !currentIterator.hasNext()) {
+                    if (!it.hasNext()) {
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+
+                    currentIterator = it.next();
+                }
+
+                return currentIterator.next();
             }
         };
     }
