@@ -110,6 +110,14 @@ public class SimpleArray<T> {
      * @return return - T
      */
     public T get(int position) {
-        return position >= this.array.length ? null : (T) this.array[position];
+        T returnValue;
+
+        if (position < 0 || position >= this.array.length) {
+            returnValue = null;
+        } else {
+            returnValue = (T) this.array[position];
+        }
+
+        return returnValue;
     }
 }
