@@ -14,7 +14,7 @@ public class IteratorEvenNumbers implements Iterator {
     private final int[] array;
     /**
      */
-    private int i = 0;
+    private int index = 0;
 
     /**
      * Constructor.
@@ -28,7 +28,7 @@ public class IteratorEvenNumbers implements Iterator {
     public boolean hasNext() {
         boolean returnResult = false;
 
-        for (int j = i; j < array.length; j++) {
+        for (int j = index; j < array.length; j++) {
             if (array[j] % 2 == 0) {
                 returnResult = true;
                 break;
@@ -40,10 +40,13 @@ public class IteratorEvenNumbers implements Iterator {
 
     @Override
     public Object next() {
-        while (array[i] % 2 != 0) {
-            i++;
+        for (int j = index; j < array.length; j++) {
+            if (array[j] % 2 == 0) {
+                index = j;
+                return array[index++];
+            }
         }
 
-        return array[i++];
+        throw new ArrayIndexOutOfBoundsException();
     }
 }
