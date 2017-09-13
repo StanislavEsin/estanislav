@@ -14,10 +14,10 @@ public class IteratorTwoDimensionalArray implements Iterator {
     private final int[][] array;
     /**
      */
-    private int i = 0;
+    private int row = 0;
     /**
      */
-    private int j = 0;
+    private int column = 0;
 
     /**
      * Constructor.
@@ -29,16 +29,20 @@ public class IteratorTwoDimensionalArray implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return j != array[i].length || array.length > i + 1;
+        return column != array[row].length || array.length > row + 1;
     }
 
     @Override
     public Object next() {
-        if (j == array[i].length) {
-            i++;
-            j = 0;
+        if (!this.hasNext()) {
+            throw new ArrayIndexOutOfBoundsException();
         }
 
-        return array[i][j++];
+        if (column == array[row].length) {
+            row++;
+            column = 0;
+        }
+
+        return array[row][column++];
     }
 }
