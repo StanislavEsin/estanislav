@@ -1,6 +1,8 @@
 package ru.job4j;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -12,6 +14,11 @@ import static org.junit.Assert.assertThat;
  * @since 12.09.2017
  */
 public class IteratorPrimeNumberTest {
+    /**
+     */
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     /**
      * Test add.
      */
@@ -38,5 +45,22 @@ public class IteratorPrimeNumberTest {
         boolean result = it.hasNext();
 
         assertThat(result, is(false));
+    }
+
+    /**
+     * Test add.
+     * @throws ArrayIndexOutOfBoundsException - .
+     */
+    @Test
+    public void whenGetNextCallThenArrayIndexOutOfBoundsException()
+            throws ArrayIndexOutOfBoundsException {
+        IteratorPrimeNumber it = new IteratorPrimeNumber(new int[]{3, 4, 5, 6, 7});
+
+        thrown.expect(ArrayIndexOutOfBoundsException.class);
+
+        it.next();
+        it.next();
+        it.next();
+        it.next();
     }
 }

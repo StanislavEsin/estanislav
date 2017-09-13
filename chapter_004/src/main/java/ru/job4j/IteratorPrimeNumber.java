@@ -16,7 +16,7 @@ public class IteratorPrimeNumber implements Iterator {
     private final int[] array;
     /**
      */
-    private int i = 0;
+    private int index = 0;
     /**
      */
     private Map<Integer, Boolean> cache = new HashMap<>();
@@ -33,7 +33,7 @@ public class IteratorPrimeNumber implements Iterator {
     public boolean hasNext() {
         boolean returnHasNext = false;
 
-        for (int j = i; j < array.length; j++) {
+        for (int j = index; j < array.length; j++) {
             if (checkPrimeNumber(array[j])) {
                 returnHasNext = true;
                 break;
@@ -45,13 +45,14 @@ public class IteratorPrimeNumber implements Iterator {
 
     @Override
     public Object next() {
-        int returnValue = 0;
-
-        while (returnValue == 0) {
-            returnValue = checkPrimeNumber(array[i++]) ? array[i - 1] : 0;
+        for (int j = index; j < array.length; j++) {
+            if (checkPrimeNumber(array[j])) {
+                index = j;
+                return array[index++];
+            }
         }
 
-        return returnValue;
+        throw new ArrayIndexOutOfBoundsException();
     }
 
     /**
