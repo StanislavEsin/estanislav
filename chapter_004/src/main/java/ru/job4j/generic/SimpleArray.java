@@ -10,7 +10,7 @@ package ru.job4j.generic;
 public class SimpleArray<T> {
     /**
      */
-    private Object[] array;
+    private T[] array;
     /**
      */
     private int index = 0;
@@ -20,21 +20,21 @@ public class SimpleArray<T> {
      * @param size - int
      */
     public SimpleArray(int size) {
-        this.array = new Object[size];
+        this.array = (T[]) new Object[size];
     }
 
     /**
      * add.
-     * @param v - T
+     * @param value - T
      * @return return - boolean
      */
-    public boolean add(T v) {
+    public boolean add(T value) {
         boolean returnValue = true;
 
         if (this.index == this.array.length) {
             returnValue = false;
         } else {
-            this.array[this.index++] = v;
+            this.array[this.index++] = value;
         }
 
         return returnValue;
@@ -43,16 +43,16 @@ public class SimpleArray<T> {
     /**
      * update.
      * @param position - int
-     * @param v - T
+     * @param value - T
      * @return return - boolean
      */
-    public boolean update(int position, T v) {
+    public boolean update(int position, T value) {
         boolean returnValue = true;
 
         if (position >= this.array.length) {
             returnValue = false;
         } else {
-            this.array[position] = v;
+            this.array[position] = value;
         }
 
         return returnValue;
@@ -82,14 +82,14 @@ public class SimpleArray<T> {
 
     /**
      * delete.
-     * @param v - T
+     * @param value - T
      * @return return - boolean
      */
-    public boolean delete(T v) {
+    public boolean delete(T value) {
         boolean returnValue = false;
 
         for (int i = 0; i < this.array.length; i++) {
-            if (this.array[i] != null && this.array[i].equals(v)) {
+            if (this.array[i] != null && this.array[i].equals(value)) {
                 if (i == this.index - 1) {
                     this.array[this.index--] = null;
                 } else {
@@ -115,9 +115,17 @@ public class SimpleArray<T> {
         if (position < 0 || position >= this.array.length) {
             returnValue = null;
         } else {
-            returnValue = (T) this.array[position];
+            returnValue = this.array[position];
         }
 
         return returnValue;
+    }
+
+    /**
+     * size.
+     * @return return - int
+     */
+    public int size() {
+        return this.index - 1;
     }
 }
