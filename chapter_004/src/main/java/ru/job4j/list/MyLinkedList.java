@@ -54,6 +54,69 @@ public class MyLinkedList<E> implements Iterable<E> {
     }
 
     /**
+     * remove.
+     * @param item - E
+     * @return return - boolean
+     */
+    public boolean remove(E item) {
+        boolean result = false;
+
+        MyLinkedList.Node node;
+        if (item == null) {
+            for (node = this.first; node != null; node = node.next) {
+                if (node.item == null) {
+                    this.unlink(node);
+                    result = true;
+                    break;
+                }
+            }
+        } else {
+            for (node = this.first; node != null; node = node.next) {
+                if (item.equals(node.item)) {
+                    this.unlink(node);
+                    result = true;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * unlink.
+     * @param node - MyLinkedList.Node<E>
+     */
+    private void unlink(MyLinkedList.Node<E> node) {
+        MyLinkedList.Node<E> tmpNodePrev = node.prev;
+        MyLinkedList.Node<E> tmpNodeNext = node.next;
+
+        if (tmpNodePrev == null) {
+            this.first = tmpNodeNext;
+        } else {
+            tmpNodePrev.next = tmpNodeNext;
+            node.prev = null;
+        }
+
+        if (tmpNodeNext == null) {
+            this.last = tmpNodePrev;
+        } else {
+            tmpNodeNext.prev = tmpNodePrev;
+            node.next = null;
+        }
+
+        --this.size;
+    }
+
+    /**
+     * size.
+     * @return return - int
+     */
+    public int size() {
+        return this.size;
+    }
+
+    /**
      * node - определяем с какой стороны выгоднее итерироваться.
      * @param index - int
      * @return return - MyLinkedList.Node<E>

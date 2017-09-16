@@ -83,4 +83,68 @@ public class MyLinkedListTest {
         thrown.expect(NoSuchElementException.class);
         iterator.next();
     }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenRemoveFirstElementThenSecondElementBecomesTheFirst() {
+        MyLinkedList<String> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add("test1");
+        myLinkedList.add("test2");
+        myLinkedList.add("test3");
+
+        myLinkedList.remove("test1");
+        String result = myLinkedList.get(0);
+
+        assertThat(result, is("test2"));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenRemoveLastElementThenPenultimateElementBecomesTheLast() {
+        MyLinkedList<String> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add("test1");
+        myLinkedList.add("test2");
+        myLinkedList.add("test3");
+
+        myLinkedList.remove("test3");
+        String result = myLinkedList.get(1);
+
+        assertThat(result, is("test2"));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenRemoveElementInTheMiddleThenLinksAreRedefined() {
+        MyLinkedList<String> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add("test1");
+        myLinkedList.add("test2");
+        myLinkedList.add("test3");
+
+        myLinkedList.remove("test2");
+        String result = myLinkedList.get(1);
+
+        assertThat(result, is("test3"));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenRemoveElementWhichIsNotThenReturnFalse() {
+        MyLinkedList<String> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add("test1");
+        myLinkedList.add("test2");
+        myLinkedList.add("test3");
+
+        boolean result = myLinkedList.remove("test4");
+
+        assertThat(result, is(false));
+    }
+
 }
