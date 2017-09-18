@@ -54,7 +54,7 @@ public class SimpleSetOnLinkedList<E> implements Iterable<E> {
         SimpleSetOnLinkedList.Node nextNode = this.first;
 
         while (nextNode != null) {
-            if (nextNode.item == value) {
+            if (nextNode.item == null && value == null || nextNode.item.equals(value)) {
                 return nextIndex;
             }
 
