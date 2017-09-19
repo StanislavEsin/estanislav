@@ -18,9 +18,6 @@ public class SimpleSet<E> implements Iterable<E> {
     /**
      */
     private int size;
-    /**
-     */
-    private static final int MAX_ARRAY_SIZE = 2147483639;
 
     /**
      * Constructor.
@@ -41,11 +38,6 @@ public class SimpleSet<E> implements Iterable<E> {
 
         if (this.size + 1 == this.container.length) {
             int newCapacity = (int) (this.container.length * 1.75);
-
-            if (newCapacity > MAX_ARRAY_SIZE) {
-                throw new OutOfMemoryError();
-            }
-
             this.container = Arrays.copyOf(this.container, newCapacity);
         }
 
