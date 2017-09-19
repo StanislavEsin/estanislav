@@ -1,8 +1,5 @@
 package ru.job4j.list;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Utils.
  *
@@ -16,15 +13,19 @@ public class Utils {
      * @return return - boolean
      */
     boolean hasCycle(Node first) {
-        Set<Node> set = new HashSet<>();
+        Node externalNode = first;
+        while (externalNode != null) {
 
-        Node tmpNode = first;
-        while (tmpNode != null) {
-            if (set.add(tmpNode)) {
-                tmpNode = tmpNode.next;
-            } else {
-                return true;
+            Node inerNode = externalNode.next;
+            while (inerNode != null) {
+                if (externalNode.equals(inerNode)) {
+                    return true;
+                }
+
+                inerNode = inerNode.next;
             }
+
+            externalNode = externalNode.next;
         }
 
         return false;
