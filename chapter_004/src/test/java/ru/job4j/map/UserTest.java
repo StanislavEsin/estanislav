@@ -17,7 +17,7 @@ public class UserTest {
      * Test add.
      */
     @Test
-    public void whenAddTwoUsersDoNotOverrideEqualsHashCode() {
+    public void AddTwoUsers() {
         User userA = new User("test", 1, Calendar.getInstance());
         User userB = new User("test", 1, Calendar.getInstance());
 
