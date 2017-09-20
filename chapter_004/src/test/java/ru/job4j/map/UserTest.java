@@ -25,6 +25,6 @@ public class UserTest {
         map.put(userA, new Object());
         map.put(userB, new Object());
 
-        System.out.println(map);
+        System.out.println(map.size());
     }
 }
