@@ -1,4 +1,4 @@
-package ru.job4j.map;
+package ru.job4j.tree;
 
 /**
  * SimpleTree.

@@ -1,4 +1,4 @@
-package ru.job4j.map;
+package ru.job4j.tree;
 
 import org.junit.Test;
 
@@ -46,5 +46,38 @@ public class TreeTest {
         String result = iterator.next();
 
         assertThat(result, is("1-1-2"));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenTreeBinaryThenShouldTrue() {
+        Tree<String> tree = new Tree<>();
+        tree.add(null, "1");
+        tree.add("1", "1-1");
+        tree.add("1-1", "1-1-1");
+        tree.add("1-1", "1-1-2");
+
+        boolean result = tree.isBinary();
+
+        assertThat(result, is(true));
+    }
+
+    /**
+     * Test add.
+     */
+    @Test
+    public void whenTreeNotBinaryThenShouldFalse() {
+        Tree<String> tree = new Tree<>();
+        tree.add(null, "1");
+        tree.add("1", "1-1");
+        tree.add("1-1", "1-1-1");
+        tree.add("1-1", "1-1-2");
+        tree.add("1-1", "1-1-3");
+
+        boolean result = tree.isBinary();
+
+        assertThat(result, is(false));
     }
 }

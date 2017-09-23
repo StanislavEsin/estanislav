@@ -1,4 +1,4 @@
-package ru.job4j.map;
+package ru.job4j.tree;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -94,5 +94,26 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         }
 
         return list.iterator();
+    }
+
+    /**
+     * isBinary.
+     * @return return - boolean
+     */
+    public boolean isBinary() {
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.add(this.root);
+
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.remove();
+
+            if (node.children.size() > 2) {
+                return false;
+            }
+
+            queue.addAll(node.children);
+        }
+
+        return true;
     }
 }
