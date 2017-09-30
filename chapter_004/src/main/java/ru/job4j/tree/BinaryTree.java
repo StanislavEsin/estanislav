@@ -51,7 +51,7 @@ public class BinaryTree<E extends Comparable<E>> implements SimpleTree<E> {
      * @param child - child.
      * @return - boolean
      */
-    public boolean adds(E child) {
+    public boolean add(E child) {
         boolean result;
 
         if (this.root == null) {
