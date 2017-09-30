@@ -14,17 +14,37 @@ import java.util.NoSuchElementException;
 public class ReferenceBook<T, V> implements Iterable<T> {
     /**
      */
-    private T[] containerKey;
-    /**
-     */
-    private V[] containerValue;
+    private Node<T, V>[] nodes;
 
     /**
      * Constructor.
      */
     public ReferenceBook() {
-        this.containerKey = (T[]) new Object[16];
-        this.containerValue = (V[]) new Object[16];
+        this.nodes = new Node[16];
+    }
+
+    /**
+     * Node.
+     * @param <T>
+     * @param <V>
+     */
+    private class Node<T, V> {
+        /**
+         */
+        final T key;
+        /**
+         */
+        V value;
+
+        /**
+         * Constructor.
+         * @param key - T
+         * @param value - V
+         */
+        Node(T key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 
     /**
@@ -40,12 +60,11 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         int index = this.hash(key);
 
-        if (this.containerKey[index] != null) {
+        if (this.nodes[index] != null) {
             return false;
         }
 
-        this.containerKey[index] = key;
-        this.containerValue[index] = value;
+        this.nodes[index] = new Node(key, value);
 
         return true;
     }
@@ -62,8 +81,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         int index = this.hash(key);
 
-        if (key.equals(this.containerKey[index])) {
-            return this.containerValue[index];
+        if (this.nodes[index] != null && key.equals(this.nodes[index].key)) {
+            return this.nodes[index].value;
         }
 
         return null;
@@ -81,9 +100,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         int index = this.hash(key);
 
-        if (key.equals(this.containerKey[index])) {
-            this.containerKey[index] = null;
-            this.containerValue[index] = null;
+        if (this.nodes[index] != null && key.equals(this.nodes[index].key)) {
+            this.nodes[index] = null;
 
             return true;
         }
@@ -97,9 +115,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
      * @return return - int
      */
     private int hash(T key) {
-        return (key == null) ? 0 : key.hashCode() & 15;
+        return (key == null) ? 0 : key.hashCode() & (this.nodes.length - 1);
     }
-
 
     /**
      * Returns an iterator over elements of type {@code T}.
@@ -121,8 +138,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            for (int i = cursor; i < ReferenceBook.this.containerKey.length; i++) {
-                if (ReferenceBook.this.containerKey[i] != null) {
+            for (int i = cursor; i < ReferenceBook.this.nodes.length; i++) {
+                if (ReferenceBook.this.nodes[i] != null) {
                     return true;
                 }
             }
@@ -132,10 +149,10 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         @Override
         public T next() {
-            for (int i = cursor; i < ReferenceBook.this.containerKey.length; i++) {
-                if (ReferenceBook.this.containerKey[i] != null) {
+            for (int i = cursor; i < ReferenceBook.this.nodes.length; i++) {
+                if (ReferenceBook.this.nodes[i] != null) {
                     this.cursor = i + 1;
-                    return ReferenceBook.this.containerKey[i];
+                    return ReferenceBook.this.nodes[i].key;
                 }
             }
 
