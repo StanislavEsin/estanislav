@@ -54,6 +54,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
      * @return return - boolean
      */
     public boolean insert(T key, V value) {
+        boolean result = true;
+
         if (key == null) {
             throw new NullPointerException();
         }
@@ -61,12 +63,12 @@ public class ReferenceBook<T, V> implements Iterable<T> {
         int index = this.hash(key);
 
         if (this.nodes[index] != null) {
-            return false;
+            result = false;
+        } else {
+            this.nodes[index] = new Node(key, value);
         }
 
-        this.nodes[index] = new Node(key, value);
-
-        return true;
+        return result;
     }
 
     /**
@@ -75,6 +77,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
      * @return return - V
      */
     public V get(T key) {
+        V result = null;
+
         if (key == null) {
             throw new NullPointerException();
         }
@@ -82,10 +86,10 @@ public class ReferenceBook<T, V> implements Iterable<T> {
         int index = this.hash(key);
 
         if (this.nodes[index] != null && key.equals(this.nodes[index].key)) {
-            return this.nodes[index].value;
+            result = this.nodes[index].value;
         }
 
-        return null;
+        return result;
     }
 
     /**
@@ -94,6 +98,8 @@ public class ReferenceBook<T, V> implements Iterable<T> {
      * @return return - boolean
      */
     public boolean delete(T key) {
+        boolean result = false;
+
         if (key == null) {
             throw new NullPointerException();
         }
@@ -103,10 +109,10 @@ public class ReferenceBook<T, V> implements Iterable<T> {
         if (this.nodes[index] != null && key.equals(this.nodes[index].key)) {
             this.nodes[index] = null;
 
-            return true;
+            result = true;
         }
 
-        return false;
+        return result;
     }
 
     /**
@@ -138,13 +144,16 @@ public class ReferenceBook<T, V> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
+            boolean result = false;
+
             for (int i = cursor; i < ReferenceBook.this.nodes.length; i++) {
                 if (ReferenceBook.this.nodes[i] != null) {
-                    return true;
+                    result = true;
+                    break;
                 }
             }
 
-            return false;
+            return result;
         }
 
         @Override
