@@ -1,8 +1,5 @@
 package ru.job4j.threads;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * WordCounter.
  *
@@ -12,7 +9,7 @@ import java.util.regex.Pattern;
 public class WordCounter implements Runnable {
     /**
      */
-    String text;
+    private final String text;
 
     /**
      * Constructor.
@@ -27,13 +24,21 @@ public class WordCounter implements Runnable {
      */
     @Override
     public void run() {
-        Matcher matcher = Pattern.compile("([^ ]+)").matcher(this.text);
+        char[] array = this.text.toCharArray();
 
-        int count = 0;
-        while (matcher.find()) {
-            count++;
+        int tempCount = 0;
+        int countWord = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (' ' == array[i]) {
+                if (tempCount != 0) {
+                    countWord++;
+                    tempCount = 0;
+                }
+            } else {
+                tempCount++;
+            }
         }
 
-        System.out.println(count);
+        System.out.println(countWord);
     }
 }

@@ -1,8 +1,5 @@
 package ru.job4j.threads;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * SpacingCounter.
  *
@@ -12,7 +9,7 @@ import java.util.regex.Pattern;
 public class SpacingCounter implements Runnable {
     /**
      */
-    String text;
+    private final String text;
 
     /**
      * Constructor.
@@ -27,11 +24,13 @@ public class SpacingCounter implements Runnable {
      */
     @Override
     public void run() {
-        Matcher matcher = Pattern.compile("[ ]").matcher(this.text);
+        char[] array = this.text.toCharArray();
 
         int count = 0;
-        while (matcher.find()) {
-            count++;
+        for (int i = 0; i < array.length; i++) {
+            if (' ' == array[i]) {
+                count++;
+            }
         }
 
         System.out.println(count);
