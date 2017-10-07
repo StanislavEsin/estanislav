@@ -17,4 +17,13 @@ public class DemonstrationParallelExecutionTest {
         DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
         demonstration.demonstrationTwoThreadsWorkInParallel();
     }
+
+    /**
+     * Test.
+     */
+    @Test
+    public void demonstrationWaitingOutputAndInterrupt() {
+        DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
+        demonstration.demonstrationWaitingOutputAndInterrupt();
+    }
 }

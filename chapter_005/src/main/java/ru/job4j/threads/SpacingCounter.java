@@ -24,10 +24,16 @@ public class SpacingCounter implements Runnable {
      */
     @Override
     public void run() {
+        Thread currentThread = Thread.currentThread();
+
         char[] array = this.text.toCharArray();
 
         int count = 0;
         for (int i = 0; i < array.length; i++) {
+            if (currentThread.isInterrupted()) {
+                return;
+            }
+
             if (' ' == array[i]) {
                 count++;
             }
