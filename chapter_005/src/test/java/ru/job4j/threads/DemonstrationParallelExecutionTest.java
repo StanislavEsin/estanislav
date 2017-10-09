@@ -26,4 +26,13 @@ public class DemonstrationParallelExecutionTest {
         DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
         demonstration.demonstrationWaitingOutputAndInterrupt();
     }
+
+    /**
+     * Test.
+     */
+    @Test
+    public void demonstrationWhenTimePassesMainThreadStops() {
+        DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
+        demonstration.demonstrationWhenTimePassesMainThreadStops();
+    }
 }

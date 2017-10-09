@@ -1,5 +1,7 @@
 package ru.job4j.threads;
 
+import java.util.Map;
+
 /**
  * DemonstrationParallelExecution.
  *
@@ -56,4 +58,24 @@ public class DemonstrationParallelExecution {
 
         System.out.println("End first thread");
     }
+
+    /**
+     * demonstrationTwoThreadsWorkInParallel.
+     */
+    public void demonstrationWhenTimePassesMainThreadStops() {
+        String txt = "test  test test  test  test test  test  test test  test  test test  "
+                + "test  test test  test  test test  test  test test  ";
+
+        System.out.println("Start first thread");
+
+        Thread wordCounter = new Thread(new WordCounter(txt));
+        Thread time = new Thread(new Time(wordCounter, 0));
+        time.isDaemon();
+
+        time.start();
+        wordCounter.start();
+
+        System.out.println("End first thread");
+    }
+
 }
