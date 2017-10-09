@@ -1,7 +1,5 @@
 package ru.job4j.threads;
 
-import java.util.Map;
-
 /**
  * DemonstrationParallelExecution.
  *

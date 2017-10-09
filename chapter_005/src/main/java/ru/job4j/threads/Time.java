@@ -7,14 +7,19 @@ package ru.job4j.threads;
  * @since 08.10.2017
  */
 public class Time implements Runnable {
+    /**
+     */
     private final long timeMillis;
+    /**
+     */
     private final Thread stopThread;
 
     /**
      * Constructor.
+     * @param thread - Thread.
      * @param timeMillis - long.
      */
-    public Time(Thread thread,long timeMillis) {
+    public Time(Thread thread, long timeMillis) {
         this.timeMillis = timeMillis;
         this.stopThread = thread;
     }
