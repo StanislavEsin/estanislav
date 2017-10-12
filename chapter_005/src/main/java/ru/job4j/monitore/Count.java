@@ -13,7 +13,7 @@ import net.jcip.annotations.ThreadSafe;
 public class Count implements Runnable {
     /**
      */
-    @GuardedBy("Count.class") private static int count = 0;
+    @GuardedBy("Count.class") private int count = 0;
 
     /**
      * @see Thread#run()
@@ -30,6 +30,8 @@ public class Count implements Runnable {
      * @return - int.
      */
     private int incremant() {
-        return ++Count.count;
+        synchronized (Count.class) {
+            return ++this.count;
+        }
     }
 }
