@@ -1,9 +1,7 @@
 package ru.job4j.monitore;
 
 import net.jcip.annotations.ThreadSafe;
-
-import java.util.Map;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * UserStorage.
@@ -15,13 +13,13 @@ import java.util.HashMap;
 public class UserStorage {
     /**
      */
-    private final Map<Integer, User> map;
+    private final ConcurrentHashMap<Integer, User> map;
 
     /**
      * Constructor.
      */
     public UserStorage() {
-        this.map = new HashMap<>();
+        this.map = new ConcurrentHashMap<>();
     }
 
     /**
