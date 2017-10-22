@@ -90,7 +90,7 @@ public class ThreadSafeSimpleArrayListTest {
      * Test add.
      */
     @Test
-    public void whenXThenY() {
+    public void whenAddValueInThreadThenThreadSafe() {
         ExecutorService service = Executors.newCachedThreadPool();
         ThreadSafeSimpleArrayList<Integer> threadSaveArray = new ThreadSafeSimpleArrayList<>();
         ThreadTest threadTest = new ThreadTest(threadSaveArray);
