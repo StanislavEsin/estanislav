@@ -29,7 +29,7 @@
         <module name="MemberName"/>
         <module name="MethodName"/>
         <module name="PackageName">
-            <property name="format" value="^[a-z]+(\.[a-z0-9]*)*$"/>
+            <property name="format" value="^[a-z]+(\.[a-z0-9_]*)*$"/>
         </module>
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>

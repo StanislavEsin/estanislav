@@ -12,7 +12,7 @@ public class SimpleLock {
     private static boolean locked = false;
     /**
      */
-    private static final Object lockObject = new Object();
+    private static Object lockObject = new Object();
 
     /**
      * lock.
