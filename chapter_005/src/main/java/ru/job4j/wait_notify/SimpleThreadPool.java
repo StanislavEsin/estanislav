@@ -1,5 +1,7 @@
 package ru.job4j.wait_notify;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -47,6 +49,23 @@ public class SimpleThreadPool {
     }
 
     /**
+     * shutdownNow.
+     * @return List - List<Runnable>.
+     */
+    public List<Runnable> shutdownNow() {
+        List<Runnable> result;
+
+        synchronized (workQueue) {
+            result = new ArrayList<>(this.workQueue);
+            for (Thread worker : this.workers) {
+                worker.interrupt();
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Worker.
      */
     private class Worker extends Thread {
@@ -58,7 +77,7 @@ public class SimpleThreadPool {
                         try {
                             workQueue.wait();
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+
                         }
                     }
 
