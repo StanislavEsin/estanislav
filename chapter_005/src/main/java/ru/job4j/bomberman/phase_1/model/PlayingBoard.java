@@ -1,11 +1,6 @@
 package ru.job4j.bomberman.phase_1.model;
 
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.ConcurrentHashMap;
-
-import ru.job4j.bomberman.phase_1.exception.CellBusyException;
 
 /**
  * PlayingBoard.
@@ -14,15 +9,23 @@ import ru.job4j.bomberman.phase_1.exception.CellBusyException;
  * @since 29.10.2017
  */
 public class PlayingBoard {
+    /**
+     */
     private final ReentrantLock[][] board;
-    private final ConcurrentHashMap<Coordinate, ObjectBoard> objectsBoard = new ConcurrentHashMap<>();
-    private final ReentrantLock lock = new ReentrantLock();
 
+    /**
+     * Constructor.
+     * @param area - размер игрового поля.
+     */
     public PlayingBoard(Coordinate area) {
         this.board = new ReentrantLock[area.getY()][area.getX()];
         initialization(area);
     }
 
+    /**
+     * initialization.
+     * @param area - размер игрового поля.
+     */
     private void initialization(Coordinate area) {
         int maxY = area.getY();
         for (int i = 0; i < maxY; i++) {
@@ -34,51 +37,47 @@ public class PlayingBoard {
         }
     }
 
-    public void addObjectInBoard(Coordinate coordinate, ObjectBoard object) throws CellBusyException {
-        ReentrantLock cell = getCell(coordinate);
-
-        if (cell.isLocked()) {
-            throw new CellBusyException();
-        }
-
-        this.objectsBoard.put(coordinate, object);
-        cell.lock();
-    }
-
-    public void changeCoordinate(Coordinate currentCoordinate, Coordinate newCoordinate
-            , ObjectBoard value) throws CellBusyException {
-
-        this.objectsBoard.remove(currentCoordinate);
-        this.objectsBoard.put(newCoordinate, value);
-    }
-
-
-    public Coordinate getCoordinate(ObjectBoard object) {
-        this.lock.lock();
-
-        Coordinate result = null;
-
-        Set<Map.Entry<Coordinate, ObjectBoard>> entrySet = this.objectsBoard.entrySet();
-        for (Map.Entry<Coordinate, ObjectBoard> pair : entrySet) {
-            if (object.equals(pair.getValue())) {
-                result = pair.getKey();
-                break;
-            }
-        }
-
-        this.lock.unlock();
-
-        return result;
-    }
-
+    /**
+     * getCell.
+     * @param coordinate - Coordinate.
+     * @return ReentrantLock.
+     */
     public ReentrantLock getCell(Coordinate coordinate) {
         return this.board[coordinate.getY()][coordinate.getX()];
     }
 
+    /**
+     * getCoordinate.
+     * @param cell - ReentrantLock.
+     * @return Coordinate.
+     */
+    public Coordinate getCoordinate(ReentrantLock cell) {
+        Coordinate result = null;
+
+        for (int i = 0; i < this.board.length && result == null; i++) {
+            for (int j = 0; j < this.board[i].length && result == null; j++) {
+                if (cell.equals(this.board[i][j])) {
+                    result = new Coordinate(i, j);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * getMaximumY.
+     * @return int.
+     */
     public int getMaximumY() {
         return this.board.length;
     }
 
+    /**
+     * getCoordinate.
+     * @param y - int.
+     * @return int.
+     */
     public int getMaximumX(int y) {
         return this.board[y].length;
     }

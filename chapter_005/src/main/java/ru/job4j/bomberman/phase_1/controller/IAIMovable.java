@@ -1,7 +1,5 @@
 package ru.job4j.bomberman.phase_1.controller;
 
-import ru.job4j.bomberman.phase_1.exception.CellBusyException;
-
 /**
  * IAIMovable - "ИИ" движение по полю.
  *
@@ -12,5 +10,5 @@ public interface IAIMovable extends Runnable {
     /**
      * move - логика движения.
      */
-    void move() throws InterruptedException, CellBusyException;
+    void move();
 }

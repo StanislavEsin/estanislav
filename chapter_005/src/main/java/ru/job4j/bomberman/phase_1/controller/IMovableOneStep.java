@@ -1,7 +1,5 @@
 package ru.job4j.bomberman.phase_1.controller;
 
-import ru.job4j.bomberman.phase_1.exception.CellBusyException;
-
 /**
  * IMovableOneStep - возможность ходить на 1 клетку в разные стороны.
  *
@@ -13,7 +11,7 @@ public interface IMovableOneStep {
      * moveUp.
      * @return boolean.
      */
-    boolean moveUp() throws InterruptedException, CellBusyException;
+    boolean moveUp();
     /**
      * moveRight.
      * @return boolean.

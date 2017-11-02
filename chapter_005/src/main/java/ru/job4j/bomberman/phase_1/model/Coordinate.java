@@ -15,7 +15,7 @@ public class Coordinate {
     private final int y;
 
     /**
-     * Constructor
+     * Constructor.
      * @param x - int.
      * @param y - int.
      */
@@ -25,19 +25,19 @@ public class Coordinate {
     }
 
     /**
-     * getX.
-     * @return int.
-     */
-    public int getX() {
-        return this.x;
-    }
-
-    /**
      * getY.
      * @return int.
      */
     public int getY() {
         return this.y;
+    }
+
+    /**
+     * getX.
+     * @return int.
+     */
+    public int getX() {
+        return this.x;
     }
 
     @Override
