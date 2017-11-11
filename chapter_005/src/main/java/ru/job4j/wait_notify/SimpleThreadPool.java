@@ -71,13 +71,13 @@ public class SimpleThreadPool {
     private class Worker extends Thread {
         @Override
         public void run() {
-            while (true) {
+            while (!isInterrupted()) {
                 synchronized (workQueue) {
                     while (workQueue.isEmpty()) {
                         try {
                             workQueue.wait();
                         } catch (InterruptedException e) {
-
+                            Thread.currentThread().interrupt();
                         }
                     }
 
