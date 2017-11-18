@@ -48,8 +48,8 @@ public class Hero extends ObjectBoard implements IMovableOneStep, IAIMovable {
                 currentCell.unlock();
                 setCurrentCell(lNewCell);
                 result = true;
-                System.out.println(String.format("%s походил из поля %s в поле %s"
-                        , Thread.currentThread().getName(), this.board.getCoordinate(currentCell), lNewCoordinate));
+                System.out.println(String.format("%s походил из поля %s в поле %s",
+                        Thread.currentThread().getName(), this.board.getCoordinate(currentCell), lNewCoordinate));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -102,6 +102,8 @@ public class Hero extends ObjectBoard implements IMovableOneStep, IAIMovable {
                     break;
                 case LEFT:
                     moveDone = moveLeft();
+                    break;
+                default:
                     break;
             }
         }

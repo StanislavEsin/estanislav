@@ -26,6 +26,7 @@ public class Bomberman  extends ObjectBoard implements IMovableOneStep {
 
         while (!Thread.currentThread().isInterrupted() && !this.destroyed[0]) {
             //обработка нажатия клавишь на клавиатуре
+            continue;
         }
 
         if (this.destroyed[0]) {

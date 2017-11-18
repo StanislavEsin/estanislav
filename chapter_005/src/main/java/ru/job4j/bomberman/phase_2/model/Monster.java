@@ -57,6 +57,8 @@ public class Monster extends ObjectBoard implements IMovableOneStep, IAIMovable 
                 case LEFT:
                     moveDone = moveLeft();
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -128,7 +130,7 @@ public class Monster extends ObjectBoard implements IMovableOneStep, IAIMovable 
             } else {
                 switch (objectOnNextCoordinate.getType()) {
                     case BOMBERMAN:
-                        ((Bomberman)objectOnNextCoordinate).destroy();
+                        ((Bomberman) objectOnNextCoordinate).destroy();
 
                         try {
                             result = board.moveObject(this, currentCoordinate, nextCoordinate, 500);
@@ -142,6 +144,8 @@ public class Monster extends ObjectBoard implements IMovableOneStep, IAIMovable 
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                         }
+                        break;
+                    default:
                         break;
                 }
             }
