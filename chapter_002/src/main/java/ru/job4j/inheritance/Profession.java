@@ -16,7 +16,7 @@ public class Profession {
      * Constructor
      * @param name - String
      */
-    public Profession (String name) {
+    public Profession(String name) {
         this.name = name;
     }
 
