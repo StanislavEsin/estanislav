@@ -1,5 +1,6 @@
 package ru.job4j.wait_notify.call_center;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class ATETest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstration() {
         ATE ate = new ATE();
         Thread threadConsultant1 = new Thread(new ConsultantConsumer(ate));

@@ -1,5 +1,6 @@
 package ru.job4j.monitore;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ParallerSearchTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstration() {
         List<String> fileFormat = new ArrayList<>();
         fileFormat.add("txt");

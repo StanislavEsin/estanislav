@@ -1,5 +1,6 @@
 package ru.job4j.monitore;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class CountTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstration() {
         Count count = new Count();
         Thread threadCountA = new Thread(count);

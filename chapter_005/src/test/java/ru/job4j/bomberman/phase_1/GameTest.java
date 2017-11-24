@@ -1,5 +1,6 @@
 package ru.job4j.bomberman.phase_1;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class GameTest {
      * Test.
      * */
     @Test
+    @Ignore("demonstration")
     public void demonstration() {
         new Game().start();
     }

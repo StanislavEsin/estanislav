@@ -1,5 +1,6 @@
 package ru.job4j.jmm;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class ActionTest {
      * Test.
      * */
     @Test
+    @Ignore("demonstration")
     public void demonstrationThreadProblems() {
         Thread threadActionA = new Thread(new Action());
         Thread threadActionB = new Thread(new Action());

@@ -1,5 +1,6 @@
 package ru.job4j.wait_notify;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class SimpleThreadPoolTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstration() {
         SimpleThreadPool threadPool = new SimpleThreadPool();
 

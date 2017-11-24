@@ -1,5 +1,6 @@
 package ru.job4j.threads;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class DemonstrationParallelExecutionTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstrationTwoThreadsWorkInParallel() {
         DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
         demonstration.demonstrationTwoThreadsWorkInParallel();
@@ -22,6 +24,7 @@ public class DemonstrationParallelExecutionTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstrationWaitingOutputAndInterrupt() {
         DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
         demonstration.demonstrationWaitingOutputAndInterrupt();
@@ -31,6 +34,7 @@ public class DemonstrationParallelExecutionTest {
      * Test.
      */
     @Test
+    @Ignore("demonstration")
     public void demonstrationWhenTimePassesMainThreadStops() {
         DemonstrationParallelExecution demonstration = new DemonstrationParallelExecution();
         demonstration.demonstrationWhenTimePassesMainThreadStops();

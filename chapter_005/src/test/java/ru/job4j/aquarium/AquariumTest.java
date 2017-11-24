@@ -1,5 +1,6 @@
 package ru.job4j.aquarium;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ public class AquariumTest {
      * Test.
      * */
     @Test
+    @Ignore("demonstration")
     public void demonstration() throws InterruptedException {
         Thread aquarium = new Thread(new Aquarium(2));
         aquarium.start();
