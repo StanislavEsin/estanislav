@@ -17,7 +17,7 @@ public class UserTest {
      * Test add.
      */
     @Test
-    public void AddTwoUsers() {
+    public void addTwoUsers() {
         User userA = new User("test", 1, Calendar.getInstance());
         User userB = new User("test", 1, Calendar.getInstance());
 

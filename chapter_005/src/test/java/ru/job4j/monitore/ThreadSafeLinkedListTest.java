@@ -125,7 +125,9 @@ public class ThreadSafeLinkedListTest {
             service.submit(new Thread(threadTest));
         }
         service.shutdown();
-        while (!service.isTerminated()) {}
+        while (!service.isTerminated()) {
+            continue;
+        }
 
         int result = 0;
         for (int i = 0; i < 100; i++) {
