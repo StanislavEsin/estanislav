@@ -183,14 +183,12 @@ public class BookTest {
 
         book.printOrderBook();
 
-
-        String lineSeparator = System.lineSeparator();
-        assertThat(out.toString(), is(System.lineSeparator()
-                                            + "     Order book: book1" + lineSeparator
-                                            + "_____________________________" + lineSeparator
-                                            + "Volume@Price  |  Volume@Price" + lineSeparator
-                                            + "  10@10,00    -    3@40,00   " + lineSeparator
-                                            + "------------- -   20@60,00   " + lineSeparator
-                                            + "------------- -    2@80,00   "  + lineSeparator));
+        assertThat(out.toString(), is("\r\n"
+                                            + "     Order book: book1\r\n"
+                                            + "_____________________________\r\n"
+                                            + "Volume@Price  |  Volume@Price\r\n"
+                                            + "  10@10,00    -    3@40,00   \r\n"
+                                            + "------------- -   20@60,00   \r\n"
+                                            + "------------- -    2@80,00   \r\n"));
     }
 }
