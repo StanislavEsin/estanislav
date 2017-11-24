@@ -26,7 +26,9 @@ public class PaintTest {
 
         paint.draw();
 
-        String expected = "++++\r\n++++\r\n++++\r\n++++\r\n";
+
+        String expected = "++++" + System.lineSeparator() + "++++" + System.lineSeparator()
+                + "++++" + System.lineSeparator() + "++++" + System.lineSeparator();
 
         assertThat(out.toString(), is(expected));
     }
@@ -43,7 +45,8 @@ public class PaintTest {
 
         paint.draw();
 
-        String expected = "   +   \r\n  +++  \r\n +++++ \r\n+++++++\r\n";
+        String expected = "   +   " + System.lineSeparator() + "  +++  " + System.lineSeparator()
+                + " +++++ " + System.lineSeparator() + "+++++++" + System.lineSeparator();
 
         assertThat(out.toString(), is(expected));
     }
