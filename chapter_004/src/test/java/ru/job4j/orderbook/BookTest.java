@@ -187,8 +187,8 @@ public class BookTest {
                                             + "     Order book: book1" + System.lineSeparator()
                                             + "_____________________________" + System.lineSeparator()
                                             + "Volume@Price  |  Volume@Price" + System.lineSeparator()
-                                            + "  10@10,00    -    3@40,00   " + System.lineSeparator()
-                                            + "------------- -   20@60,00   " + System.lineSeparator()
-                                            + "------------- -    2@80,00   " + System.lineSeparator()));
+                                            + "  10@10.00    -    3@40.00   " + System.lineSeparator()
+                                            + "------------- -   20@60.00   " + System.lineSeparator()
+                                            + "------------- -    2@80.00   " + System.lineSeparator()));
     }
 }

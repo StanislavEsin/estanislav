@@ -1,10 +1,6 @@
 package ru.job4j.orderbook;
 
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Book.
@@ -206,8 +202,8 @@ public class Book {
             }
 
             Formatter formatterString = new Formatter();
-            formatterString.format(buyVolume == 0 ? "------------- - " : "%4d@%-8.2f - ", buyVolume, buyPrice);
-            formatterString.format(sellVolume == 0 ? "-------------" : "%4d@%-8.2f", sellVolume, sellPrice);
+            formatterString.format(Locale.ENGLISH, buyVolume == 0 ? "------------- - " : "%4d@%-8.2f - ", buyVolume, buyPrice);
+            formatterString.format(Locale.ENGLISH, sellVolume == 0 ? "-------------" : "%4d@%-8.2f", sellVolume, sellPrice);
 
             System.out.println(formatterString);
         }
