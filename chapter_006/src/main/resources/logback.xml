@@ -2,7 +2,7 @@
 <configuration debug="false">
     <!-- <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
+            <level>DEBUG</level>
         </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%-5p] [%-16.16t] [%36.36c] - %msg%n</Pattern>
@@ -10,10 +10,10 @@
     </appender> -->
 
     <appender name="ALL" class="ch.qos.logback.core.FileAppender">
-        <file>chapter_006/target/log/all.log</file>
+        <file>../chapter_006/log/all.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>TRACE</level>
+            <level>DEBUG</level>
         </filter>
         <encoder>
             <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%-5p] [%-16.16t] [%36.36c] - %msg%n</pattern>
@@ -21,7 +21,7 @@
     </appender>
 
     <appender name="ERROR" class="ch.qos.logback.core.FileAppender">
-        <file>chapter_006/target/log/error.log</file>
+        <file>../chapter_006/log/error.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -31,7 +31,7 @@
         </encoder>
     </appender>
 
-    <root level="TRACE">
+    <root level="DEBUG">
         <!-- <appender-ref ref="STDOUT" /> -->
         <appender-ref ref="ALL" />
         <appender-ref ref="ERROR" />
