@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 /**
  * StubInput - используется для подмены ввода пользовательских данных из консоли.
@@ -21,7 +21,7 @@ public class StubInput implements Input {
     private int position = 0;
 
     /**
-     * @see
+     * StubInput.
      * @param answers - String[]
      */
     public StubInput(String[] answers) {
@@ -29,30 +29,18 @@ public class StubInput implements Input {
     }
 
     /**
-     * @see
+     * StubInput.
      * @param answers - String[]
      */
     public StubInput(int[] answers) {
         this.intAnswers = answers;
     }
 
-    /**
-     * ask.
-     * @param question - String
-     * @return String
-     */
     @Override
     public String ask(String question) {
         return this.answers[this.position++];
     }
 
-    /**
-     * ask.
-     *
-     * @param question - String
-     * @param range    - int[]
-     * @return int
-     */
     @Override
     public int ask(String question, int[] range) {
         return this.intAnswers[this.position++];

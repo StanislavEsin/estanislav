@@ -1,8 +1,6 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 /**
- * @see
- *
  * Input.
  *
  * @author Stanislav (376825@mail.ru)

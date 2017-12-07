@@ -2,11 +2,11 @@ package ru.job4j;
 
 //import org.junit.Ignore;
 //import org.junit.Test;
-//import ru.job4j.Input;
-//import ru.job4j.StartUI;
-//import ru.job4j.StubInput;
-//import ru.job4j.Tracker;
-//import ru.job4j.Item;
+//import ru.job4j.ui.Input;
+//import ru.job4j.ui.StartUI;
+//import ru.job4j.ui.StubInput;
+//import ru.job4j.dao.ram.Tracker;
+//import ru.job4j.domain.Item;
 //
 //import static org.junit.Assert.assertThat;
 //

@@ -122,6 +122,8 @@
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
 					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.sql</include>
 				</includes>
 			</resource>
 		</resources>

@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 import java.util.Scanner;
 
@@ -10,12 +10,6 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class ConsoleInput implements Input {
-    /**
-     * ask.
-     *
-     * @param question - String
-     * @return String
-     */
     @Override
     public String ask(String question) {
         System.out.print(question);
@@ -23,13 +17,6 @@ public class ConsoleInput implements Input {
         return input.nextLine();
     }
 
-    /**
-     * ask.
-     *
-     * @param question - String
-     * @param range    - int[]
-     * @return int
-     */
     @Override
     public int ask(String question, int[] range) {
         int key = Integer.valueOf(this.ask("question"));

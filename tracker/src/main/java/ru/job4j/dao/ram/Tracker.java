@@ -1,8 +1,11 @@
-package ru.job4j;
+package ru.job4j.dao.ram;
 
+import ru.job4j.dao.Order;
+import ru.job4j.domain.Item;
+
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Tracker - хранилище для заявок.
@@ -11,35 +14,24 @@ import java.util.List;
  * @version $Id$
  * @since 1.0
  */
-public class Tracker {
+public class Tracker implements Order {
     /**
      * массив заявок.
      */
     private List<Item> items = new ArrayList<>();
 
-    /**
-     * add - добавление заявок.
-     * @param item - Item
-     * @return return - Item
-     */
+    @Override
     public Item add(Item item) {
         items.add(item);
         return item;
     }
 
-    /**
-     * getAll - получение списка всех заявок.
-     * @return return - Item[]
-     */
+    @Override
     public List<Item> getAll() {
         return items;
     }
 
-    /**
-     * findById - получение заявки по id.
-     * @param id - String
-     * @return return - Item
-     */
+    @Override
     public Item findById(String id) {
         Item foundItem = null;
 
@@ -53,11 +45,7 @@ public class Tracker {
         return foundItem;
     }
 
-    /**
-     * findByName - получение списка по имени.
-     * @param key - String
-     * @return return - Item[]
-     */
+    @Override
     public List<Item> findByName(String key) {
         List<Item> tmp = new ArrayList<>();
 
@@ -70,10 +58,7 @@ public class Tracker {
         return tmp;
     }
 
-    /**
-     * delete - удаление заявок.
-     * @param item - Item
-     */
+    @Override
     public void delete(Item item) {
         Iterator<Item> itemIterator = items.iterator();
 
@@ -84,10 +69,7 @@ public class Tracker {
         }
     }
 
-    /**
-     * update - редактирование заявок.
-     * @param item - Item
-     */
+    @Override
     public void update(Item item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(item.getId())) {

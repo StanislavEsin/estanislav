@@ -1,8 +1,8 @@
-package ru.job4j;
+package ru.job4j.ui;
+
+import ru.job4j.dao.Order;
 
 /**
- * @see
- *
  * UserAction.
  *
  * @author Stanislav (376825@mail.ru)
@@ -21,7 +21,8 @@ public interface UserAction {
      * @param input - Input
      * @param tracker - Tracker
      */
-    void execute(Input input, Tracker tracker);
+    void execute(Input input, Order tracker);
+
     /**
      * ask.
      * @return String

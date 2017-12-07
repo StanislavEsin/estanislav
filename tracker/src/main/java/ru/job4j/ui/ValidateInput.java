@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 /**
  * ValidateInput.
@@ -8,13 +8,6 @@ package ru.job4j;
  * @since 1.0
  */
 public class ValidateInput extends ConsoleInput {
-    /**
-     * ask.
-     *
-     * @param question - String
-     * @param range    - int[]
-     * @return int
-     */
     @Override
     public int ask(String question, int[] range) {
         boolean invalid = true;

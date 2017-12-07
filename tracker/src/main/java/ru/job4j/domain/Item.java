@@ -1,6 +1,8 @@
-package ru.job4j;
+package ru.job4j.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Item - заявка.
@@ -9,7 +11,7 @@ import java.util.Date;
  * @version $Id$
  * @since 1.0
  */
-public class Item {
+public class Item implements Comparable {
     /**
      * генератор для id.
      */
@@ -29,10 +31,10 @@ public class Item {
     private long created;
     /**
      */
-    private String[] comments;
+    private ArrayList<String> comments;
 
     /**
-     * @see
+     * Item.
      * @param name - String
      * @param desc - String
      * @param created - long
@@ -42,10 +44,11 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.created = created;
+        this.comments = new ArrayList<>();
     }
 
     /**
-     * @see
+     * Item.
      * @param id - String
      * @param name - String
      * @param desc - String
@@ -56,6 +59,7 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.created = created;
+        this.comments = new ArrayList<>();
     }
 
     /**
@@ -92,10 +96,19 @@ public class Item {
 
     /**
      * getComments.
-     * @return return - String[]
+     * @return ArrayList<String>.
      */
-    public String[] getComments() {
-        return comments;
+    public ArrayList<String> getComments() {
+        return this.comments;
+    }
+
+    /**
+     * getComments.
+     * @param number - int.
+     * @return String.
+     */
+    public String getComments(int number) {
+        return this.comments.get(number);
     }
 
     /**
@@ -116,9 +129,17 @@ public class Item {
 
     /**
      * setComments.
-     * @param comments - String[]
+     * @param comments - String
      */
-    public void setComments(String[] comments) {
+    public void setComments(String comments) {
+        this.comments.add(comments);
+    }
+
+    /**
+     * setComments.
+     * @param comments - ArrayList<String>
+     */
+    public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
 
@@ -130,10 +151,31 @@ public class Item {
         this.id = id;
     }
 
-    /**
-     * ask.
-     * @return String
-     */
+    @Override
+    public int compareTo(Object o) {
+        return Integer.compare(Integer.valueOf(this.getId()), Integer.valueOf(((Item) o).getId()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return created == item.created
+                && Objects.equals(id, item.id)
+                && Objects.equals(name, item.name)
+                && Objects.equals(desc, item.desc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, desc, created);
+    }
+
     @Override
     public String toString() {
         return "id: " + this.getId()

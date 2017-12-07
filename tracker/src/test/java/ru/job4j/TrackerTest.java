@@ -1,6 +1,8 @@
 package ru.job4j;
 
 import org.junit.Test;
+import ru.job4j.dao.ram.Tracker;
+import ru.job4j.domain.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,7 +124,7 @@ public class TrackerTest {
         boolean result = tmp.getName().equals(itemB.getName())
                 && tmp.getDesc().equals(itemB.getDesc())
                 && tmp.getCreated() == itemB.getCreated()
-                && Arrays.equals(tmp.getComments(), itemB.getComments());
+                && Arrays.equals(tmp.getComments().toArray(), itemB.getComments().toArray());
 
         assertThat(result, is(true));
     }

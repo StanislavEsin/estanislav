@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 /**
  * MenuOutException.
@@ -9,7 +9,7 @@ package ru.job4j;
  */
 public class MenuOutException extends RuntimeException {
     /**
-     * @see
+     * MenuOutException.
      * @param s - String
      */
     public MenuOutException(String s) {

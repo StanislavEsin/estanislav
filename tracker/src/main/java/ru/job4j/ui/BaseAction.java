@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.ui;
 
 /**
  * BaseAction.
@@ -16,7 +16,7 @@ public abstract class BaseAction implements UserAction {
     private int key;
 
     /**
-     * @see
+     * BaseAction.
      * @param name - String
      * @param key - int
      */
@@ -25,21 +25,12 @@ public abstract class BaseAction implements UserAction {
         this.key = key;
     }
 
-    /**
-     * ask.
-     *
-     * @return String
-     */
     @Override
     public String info() {
         return String.format("%s. %s", this.key(), this.name);
     }
 
-    /**
-     * ask.
-     *
-     * @return int
-     */
+    @Override
     public int key() {
         return this.key;
     }

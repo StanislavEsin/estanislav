@@ -1,0 +1,2 @@
+request = CREATE TABLE IF NOT EXISTS public.request (id serial PRIMARY KEY, name text NOT NULL, description text, created timestamp NOT NULL);
+comments = CREATE TABLE IF NOT EXISTS public.comments (id serial PRIMARY KEY, comment text NOT NULL, request_id integer REFERENCES public.request (id));

@@ -1,4 +1,11 @@
-package ru.job4j;
+package ru.job4j.ui;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ru.job4j.dao.DAOException;
+import ru.job4j.dao.Order;
+import ru.job4j.domain.Item;
 
 import java.util.Date;
 import java.util.List;
@@ -11,22 +18,23 @@ import java.util.List;
  * @since 1.0
  */
 public class MenuTracker {
+    protected static final Logger LOG = LoggerFactory.getLogger(MenuTracker.class);
     /**
      */
     private Input input;
     /**
      */
-    private Tracker tracker;
+    private Order tracker;
     /**
      */
     private UserAction[] actions = new UserAction[6];
 
     /**
-     * @see
+     * MenuTracker.
      * @param input - Input
      * @param tracker - Tracker
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Order tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -41,10 +49,15 @@ public class MenuTracker {
         this.actions[3] = new DeleteItem("Delete item", 4);
         this.actions[4] = new BaseAction("Find item by Id", 5) {
             @Override
-            public void execute(Input input, Tracker tracker) {
+            public void execute(Input input, Order tracker) {
                 String id = input.ask("Enter id item: ");
-                Item findItem = tracker.findById(id);
-                System.out.println(findItem);
+                Item findItem = null;
+                try {
+                    findItem = tracker.findById(id);
+                    System.out.println(findItem);
+                } catch (DAOException e) {
+                    LOG.error("Error find by id {} item", id, e);
+                }
             }
         };
         this.actions[5] = new FindItemsByName("Find items by name", 6);
@@ -88,7 +101,7 @@ public class MenuTracker {
      */
     private class AddNewItem extends BaseAction {
         /**
-         * @see
+         * AddNewItem.
          * @param name - String
          * @param key - int
          */
@@ -96,18 +109,17 @@ public class MenuTracker {
             super(name, key);
         }
 
-        /**
-         * ask.
-         * @param input - Input
-         * @param tracker - Tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Order tracker) {
             String name = input.ask("Enter name item: ");
             String desc = input.ask("Enter description item: ");
 
             Item newItem = new Item(name, desc, new Date().getTime());
-            tracker.add(newItem);
+            try {
+                tracker.add(newItem);
+            } catch (DAOException e) {
+                LOG.error("Error add item", e);
+            }
         }
     }
 
@@ -116,24 +128,23 @@ public class MenuTracker {
      */
     private static class ShowAllItems extends BaseAction {
         /**
+         * ShowAllItems.
          * @param name - String
          * @param key  - int
-         * @see
          */
         ShowAllItems(String name, int key) {
             super(name, key);
         }
 
-        /**
-         * ask.
-         * @param input - Input
-         * @param tracker - Tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
-            List<Item> findItems = tracker.getAll();
-
-            findItems.forEach(System.out::println);
+        public void execute(Input input, Order tracker) {
+            List<Item> findItems = null;
+            try {
+                findItems = tracker.getAll();
+                findItems.forEach(System.out::println);
+            } catch (DAOException e) {
+                LOG.error("Error get all items", e);
+            }
         }
     }
 
@@ -142,25 +153,24 @@ public class MenuTracker {
      */
     private class DeleteItem extends BaseAction {
         /**
+         * DeleteItem.
          * @param name - String
          * @param key  - int
-         * @see
          */
         DeleteItem(String name, int key) {
             super(name, key);
         }
 
-        /**
-         * ask.
-         * @param input - Input
-         * @param tracker - Tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Order tracker) {
             String id = input.ask("Enter id item that you want to delete: ");
-            Item findItem = tracker.findById(id);
-
-            tracker.delete(findItem);
+            Item findItem = null;
+            try {
+                findItem = tracker.findById(id);
+                tracker.delete(findItem);
+            } catch (DAOException e) {
+                LOG.error("Error delete item", e);
+            }
         }
     }
 
@@ -169,25 +179,24 @@ public class MenuTracker {
      */
     private class FindItemsByName extends BaseAction {
         /**
+         * FindItemsByName.
          * @param name - String
          * @param key  - int
-         * @see
          */
         FindItemsByName(String name, int key) {
             super(name, key);
         }
 
-        /**
-         * ask.
-         * @param input - Input
-         * @param tracker - Tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Order tracker) {
             String name = input.ask("Enter name item: ");
-            List<Item> findItems = tracker.findByName(name);
-
-            findItems.forEach(System.out::println);
+            List<Item> findItems = null;
+            try {
+                findItems = tracker.findByName(name);
+                findItems.forEach(System.out::println);
+            } catch (DAOException e) {
+                LOG.error("Error find by name {} item", name, e);
+            }
         }
     }
 }
@@ -197,28 +206,27 @@ public class MenuTracker {
  */
 class EditItem extends BaseAction {
     /**
+     * EditItem.
      * @param name - String
      * @param key  - int
-     * @see
      */
     EditItem(String name, int key) {
         super(name, key);
     }
 
-    /**
-     * ask.
-     * @param input - Input
-     * @param tracker - Tracker
-     */
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Order tracker) {
         String id = input.ask("Enter id item: ");
         String name = input.ask("Enter name item: ");
         String desc = input.ask("Enter description item: ");
 
-        Item findItem = tracker.findById(id);
-        Item item = new Item(name, desc, findItem.getCreated());
-        item.setId(id);
-        tracker.update(item);
+        Item findItem = null;
+        try {
+            findItem = tracker.findById(id);
+            Item item = new Item(id, name, desc, findItem.getCreated());
+            tracker.update(item);
+        } catch (DAOException e) {
+            MenuTracker.LOG.error("Error update items", e);
+        }
     }
 }
