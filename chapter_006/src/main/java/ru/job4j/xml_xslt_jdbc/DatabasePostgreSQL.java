@@ -98,33 +98,39 @@ public class DatabasePostgreSQL implements Database, Serializable {
      * @param con - Connection к базе.
      */
     private void createData(Connection con) throws SQLException {
-        con.setAutoCommit(false);
+        try {
+            con.setAutoCommit(false);
 
-        Statement statement = con.createStatement();
-        statement.execute("CREATE TABLE IF NOT EXISTS public.test ("
-                + "id serial PRIMARY KEY, field integer UNIQUE NOT NULL)");
+            Statement statement = con.createStatement();
+            statement.execute("CREATE TABLE IF NOT EXISTS public.test ("
+                    + "id serial PRIMARY KEY, field integer UNIQUE NOT NULL)");
 
-        ResultSet rs = statement.executeQuery("SELECT id FROM public.test LIMIT 1");
-        if (rs.next()) {
-            statement.execute("DELETE FROM public.test");
-            LOG.info("Cleared the table in the database {}", this.nameDB);
+            ResultSet rs = statement.executeQuery("SELECT id FROM public.test LIMIT 1");
+            if (rs.next()) {
+                statement.execute("DELETE FROM public.test");
+                LOG.info("Cleared the table in the database {}", this.nameDB);
+            }
+
+            rs.close();
+            statement.close();
+
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO public.test (field) VALUES (?)");
+            for (int i = 1; i <= this.numberRecords; i++) {
+                preparedStatement.setInt(1, i);
+                preparedStatement.addBatch();
+            }
+            int numberInsert = preparedStatement.executeBatch().length;
+            preparedStatement.close();
+
+            con.commit();
+            con.setAutoCommit(true);
+
+            LOG.info("In the table was recorded {} rows", numberInsert);
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+            con.rollback();
+            con.setAutoCommit(true);
         }
-
-        rs.close();
-        statement.close();
-
-        PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO public.test (field) VALUES (?)");
-        for (int i = 1; i <= this.numberRecords; i++) {
-            preparedStatement.setInt(1, i);
-            preparedStatement.addBatch();
-        }
-        int numberInsert = preparedStatement.executeBatch().length;
-        preparedStatement.close();
-
-        con.commit();
-        con.setAutoCommit(true);
-
-        LOG.info("In the table was recorded {} rows", numberInsert);
     }
 
     /**
