@@ -40,14 +40,12 @@ public class PostgresOrder implements Order {
             st.setString(1, item.getName());
             st.setString(2, item.getDesc());
             st.setTimestamp(3, new Timestamp(item.getCreated()));
-            ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                item.setId(String.valueOf(rs.getInt("id")));
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    item.setId(String.valueOf(rs.getInt("id")));
+                }
             }
-
-            rs.close();
-            st.close();
 
             ArrayList<String> comments = item.getComments();
             if (comments.size() > 0) {
@@ -61,7 +59,6 @@ public class PostgresOrder implements Order {
                 }
 
                 st.executeBatch();
-                st.close();
             }
         } catch (SQLException e) {
             throw new DAOException("Cannot add item", e);
@@ -81,26 +78,24 @@ public class PostgresOrder implements Order {
                     + "comments.comment FROM public.request AS request LEFT OUTER JOIN public.comments AS comments "
                     + "ON request.id = comments.request_id ORDER BY request.id, comments.id ";
             PreparedStatement st = con.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
 
-            while (rs.next()) {
-                String id = String.valueOf(rs.getInt("id"));
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                long created = rs.getTimestamp("created").getTime();
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    String id = String.valueOf(rs.getInt("id"));
+                    String name = rs.getString("name");
+                    String description = rs.getString("description");
+                    long created = rs.getTimestamp("created").getTime();
 
-                Item item = map.get(id);
+                    Item item = map.get(id);
 
-                if (item == null) {
-                    item = new Item(id, name, description, created);
-                    map.put(id, item);
+                    if (item == null) {
+                        item = new Item(id, name, description, created);
+                        map.put(id, item);
+                    }
+
+                    item.setComments(rs.getString("comment"));
                 }
-
-                item.setComments(rs.getString("comment"));
             }
-
-            rs.close();
-            st.close();
         } catch (SQLException e) {
             throw new DAOException("Cannot get all items", e);
         } catch (DAOConfigurationException e) {
@@ -120,22 +115,20 @@ public class PostgresOrder implements Order {
                     + "ON request.id = comments.request_id WHERE request.id = ? ORDER BY request.id, comments.id ";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, Integer.valueOf(idArgument));
-            ResultSet rs = st.executeQuery();
 
-            while (rs.next()) {
-                if (result == null) {
-                    String id = String.valueOf(rs.getInt("id"));
-                    String name = rs.getString("name");
-                    String description = rs.getString("description");
-                    long created = rs.getTimestamp("created").getTime();
-                    result = new Item(id, name, description, created);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    if (result == null) {
+                        String id = String.valueOf(rs.getInt("id"));
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        long created = rs.getTimestamp("created").getTime();
+                        result = new Item(id, name, description, created);
+                    }
+
+                    result.setComments(rs.getString("comment"));
                 }
-
-                result.setComments(rs.getString("comment"));
             }
-
-            rs.close();
-            st.close();
         } catch (SQLException e) {
             throw new DAOException("Cannot find by id item", e);
         } catch (DAOConfigurationException e) {
@@ -155,26 +148,24 @@ public class PostgresOrder implements Order {
                     + "ON request.id = comments.request_id WHERE request.name LIKE ? ORDER BY request.id, comments.id";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, key);
-            ResultSet rs = st.executeQuery();
 
-            while (rs.next()) {
-                String id = String.valueOf(rs.getInt("id"));
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                long created = rs.getTimestamp("created").getTime();
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    String id = String.valueOf(rs.getInt("id"));
+                    String name = rs.getString("name");
+                    String description = rs.getString("description");
+                    long created = rs.getTimestamp("created").getTime();
 
-                Item item = map.get(id);
+                    Item item = map.get(id);
 
-                if (item == null) {
-                    item = new Item(id, name, description, created);
-                    map.put(id, item);
+                    if (item == null) {
+                        item = new Item(id, name, description, created);
+                        map.put(id, item);
+                    }
+
+                    item.setComments(rs.getString("comment"));
                 }
-
-                item.setComments(rs.getString("comment"));
             }
-
-            rs.close();
-            st.close();
         } catch (SQLException e) {
             throw new DAOException("Cannot find by name item", e);
         } catch (DAOConfigurationException e) {
@@ -190,14 +181,12 @@ public class PostgresOrder implements Order {
             String sql = "DELETE FROM public.comments WHERE request_id = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, Integer.valueOf(item.getId()));
-            st.execute();
-            st.close();
+            st.executeUpdate();
 
             sql = "DELETE FROM public.request WHERE id = ?";
             st = con.prepareStatement(sql);
             st.setInt(1, Integer.valueOf(item.getId()));
-            st.execute();
-            st.close();
+            st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Cannot delete item", e);
         } catch (DAOConfigurationException e) {
@@ -213,8 +202,7 @@ public class PostgresOrder implements Order {
             st.setString(1, item.getName());
             st.setString(2, item.getDesc());
             st.setInt(3, Integer.valueOf(item.getId()));
-            st.execute();
-            st.close();
+            st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Cannot update item", e);
         } catch (DAOConfigurationException e) {

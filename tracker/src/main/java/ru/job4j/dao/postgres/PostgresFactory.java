@@ -29,12 +29,12 @@ public class PostgresFactory extends DAOFactory {
 
     private PostgresFactory() {
         this.defaultProperties = new Properties();
-        this.defaultProperties.setProperty("maxConnections", "10");
-        this.defaultProperties.setProperty("portNumber", "5432");
-        this.defaultProperties.setProperty("serverName", "localhost");
-        this.defaultProperties.setProperty("databaseName", "example_two");
-        this.defaultProperties.setProperty("user", "postgres");
-        this.defaultProperties.setProperty("password", "123");
+        this.defaultProperties.setProperty("jdbc.maxConnections", "10");
+        this.defaultProperties.setProperty("jdbc.portNumber", "5432");
+        this.defaultProperties.setProperty("jdbc.serverName", "localhost");
+        this.defaultProperties.setProperty("jdbc.databaseName", "example_two");
+        this.defaultProperties.setProperty("jdbc.user", "postgres");
+        this.defaultProperties.setProperty("jdbc.password", "123");
     }
 
     public static PostgresFactory getInstance() {
@@ -56,12 +56,12 @@ public class PostgresFactory extends DAOFactory {
             LOG.warn("Warning, could not load the database configuration file", e);
         }
 
-        this.source.setMaxConnections(Integer.valueOf(properties.getProperty("maxConnections")));
-        this.source.setServerName(properties.getProperty("serverName"));
-        this.source.setPortNumber(Integer.valueOf(properties.getProperty("portNumber")));
-        this.source.setDatabaseName(properties.getProperty("databaseName"));
-        this.source.setUser(properties.getProperty("user"));
-        this.source.setPassword(properties.getProperty("password"));
+        this.source.setMaxConnections(Integer.valueOf(properties.getProperty("jdbc.maxConnections")));
+        this.source.setServerName(properties.getProperty("jdbc.serverName"));
+        this.source.setPortNumber(Integer.valueOf(properties.getProperty("jdbc.portNumber")));
+        this.source.setDatabaseName(properties.getProperty("jdbc.databaseName"));
+        this.source.setUser(properties.getProperty("jdbc.user"));
+        this.source.setPassword(properties.getProperty("jdbc.password"));
     }
 
     /**
@@ -82,7 +82,6 @@ public class PostgresFactory extends DAOFactory {
             if (script != null && !script.isEmpty()) {
                 PreparedStatement statement = con.prepareStatement(script);
                 statement.execute();
-                statement.close();
             }
 
             script = properties.getProperty("comments");
@@ -90,7 +89,6 @@ public class PostgresFactory extends DAOFactory {
             if (script != null && !script.isEmpty()) {
                 PreparedStatement statement = con.prepareStatement(script);
                 statement.execute();
-                statement.close();
             }
         } catch (IOException e) {
             LOG.warn("When the tables were initialized, the script file was not found", e);
