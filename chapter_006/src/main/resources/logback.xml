@@ -10,7 +10,7 @@
     </appender> -->
 
     <appender name="ALL" class="ch.qos.logback.core.FileAppender">
-        <file>./chapter_006/log/all.log</file>
+        <file>./log/all.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>DEBUG</level>
@@ -21,7 +21,7 @@
     </appender>
 
     <appender name="ERROR" class="ch.qos.logback.core.FileAppender">
-        <file>./chapter_006/log/error.log</file>
+        <file>./log/error.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>

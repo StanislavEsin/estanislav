@@ -98,21 +98,16 @@ public class DatabasePostgreSQL implements Database, Serializable {
      * @param con - Connection к базе.
      */
     private void createData(Connection con) throws SQLException {
-        try {
-            con.setAutoCommit(false);
-
-            Statement statement = con.createStatement();
+        try (Statement statement = con.createStatement()) {
             statement.execute("CREATE TABLE IF NOT EXISTS public.test ("
                     + "id serial PRIMARY KEY, field integer UNIQUE NOT NULL)");
 
-            ResultSet rs = statement.executeQuery("SELECT id FROM public.test LIMIT 1");
-            if (rs.next()) {
-                statement.execute("DELETE FROM public.test");
-                LOG.info("Cleared the table in the database {}", this.nameDB);
+            try (ResultSet rs = statement.executeQuery("SELECT id FROM public.test LIMIT 1")) {
+                if (rs.next()) {
+                    statement.execute("DELETE FROM public.test");
+                    LOG.info("Cleared the table in the database {}", this.nameDB);
+                }
             }
-
-            rs.close();
-            statement.close();
 
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO public.test (field) VALUES (?)");
             for (int i = 1; i <= this.numberRecords; i++) {
@@ -120,16 +115,10 @@ public class DatabasePostgreSQL implements Database, Serializable {
                 preparedStatement.addBatch();
             }
             int numberInsert = preparedStatement.executeBatch().length;
-            preparedStatement.close();
-
-            con.commit();
-            con.setAutoCommit(true);
 
             LOG.info("In the table was recorded {} rows", numberInsert);
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
-            con.rollback();
-            con.setAutoCommit(true);
         }
     }
 
@@ -167,15 +156,13 @@ public class DatabasePostgreSQL implements Database, Serializable {
     private ArrayList<Integer> getData(Connection con) throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
 
-        Statement statement = con.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT field FROM public.test");
-
-        while (rs.next()) {
-            result.add(rs.getInt("field"));
+        try (Statement statement = con.createStatement()) {
+            try (ResultSet rs = statement.executeQuery("SELECT field FROM public.test")) {
+                while (rs.next()) {
+                    result.add(rs.getInt("field"));
+                }
+            }
         }
-
-        rs.close();
-        statement.close();
 
         return result;
     }
