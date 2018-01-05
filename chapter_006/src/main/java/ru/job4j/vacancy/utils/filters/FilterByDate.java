@@ -25,8 +25,6 @@ public final class FilterByDate {
 
     @Override
     public String toString() {
-        return "FilterByDate{" +
-                "date=" + date +
-                '}';
+        return "FilterByDate{" + "date=" + date + '}';
     }
 }
