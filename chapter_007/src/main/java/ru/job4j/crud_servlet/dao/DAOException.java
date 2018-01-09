@@ -1,4 +1,4 @@
-package ru.job4j.crudServlet.dao;
+package ru.job4j.crud_servlet.dao;
 
 /**
  * DAOException.

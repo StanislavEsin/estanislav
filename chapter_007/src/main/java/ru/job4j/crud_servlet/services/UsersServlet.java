@@ -1,10 +1,10 @@
-package ru.job4j.crudServlet.services;
+package ru.job4j.crud_servlet.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.crudServlet.dao.DAOException;
-import ru.job4j.crudServlet.dao.UserStore;
-import ru.job4j.crudServlet.model.User;
+import ru.job4j.crud_servlet.dao.DAOException;
+import ru.job4j.crud_servlet.dao.UserStore;
+import ru.job4j.crud_servlet.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

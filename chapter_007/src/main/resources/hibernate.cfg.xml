@@ -20,6 +20,6 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="ru.job4j.crudServlet.model.User"/>
+        <mapping class="ru.job4j.crud_servlet.model.User"/>
     </session-factory>
 </hibernate-configuration>

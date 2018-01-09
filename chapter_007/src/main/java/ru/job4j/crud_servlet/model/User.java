@@ -1,4 +1,4 @@
-package ru.job4j.crudServlet.model;
+package ru.job4j.crud_servlet.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

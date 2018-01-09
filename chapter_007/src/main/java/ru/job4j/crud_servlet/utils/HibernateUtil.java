@@ -1,4 +1,4 @@
-package ru.job4j.crudServlet.utils;
+package ru.job4j.crud_servlet.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,21 +10,21 @@ import org.hibernate.cfg.Configuration;
  * @since 06.01.2018
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static final SessionFactory SESSION_FACTORY;
 
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
     }
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+        return SESSION_FACTORY;
     }
 
     public static void shutdown() {
-        sessionFactory.close();
+        SESSION_FACTORY.close();
     }
 }

@@ -1,11 +1,11 @@
-package ru.job4j.crudServlet.dao;
+package ru.job4j.crud_servlet.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import ru.job4j.crudServlet.model.User;
-import ru.job4j.crudServlet.utils.HibernateUtil;
+import ru.job4j.crud_servlet.model.User;
+import ru.job4j.crud_servlet.utils.HibernateUtil;
 
 import java.util.Arrays;
 
