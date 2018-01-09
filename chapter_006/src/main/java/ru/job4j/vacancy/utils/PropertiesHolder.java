@@ -16,9 +16,10 @@ import java.util.Queue;
  * @author Stanislav (376825@mail.ru)
  * @since 28.12.2017
  */
-public final class PropertiesHolder {
+public enum PropertiesHolder {
+    INSTANCE;
+    private volatile boolean initialized = false;
     private static final Logger LOG = LoggerFactory.getLogger(JobHandler.class);
-    private volatile static PropertiesHolder instance;
     private Properties defaultProp;
     private int portNumber;
     private String serverName;
@@ -29,22 +30,13 @@ public final class PropertiesHolder {
     private long runTimeSchedule;
     private Queue<String> scripts = new LinkedList<>();
 
-    public PropertiesHolder() {
-        setDefaultProperties();
-        loadProperties();
-        loadInitializingScripts();
-    }
-
-    public static PropertiesHolder getInstance() {
-        if (instance == null) {
-            synchronized (PropertiesHolder.class) {
-                if (instance == null) {
-                    instance = new PropertiesHolder();
-                }
-            }
+    public synchronized void init() {
+        if (!initialized) {
+            setDefaultProperties();
+            loadProperties();
+            loadInitializingScripts();
+            initialized = true;
         }
-
-        return instance;
     }
 
     private void setDefaultProperties() {

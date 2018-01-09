@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 public final class VacancyDAOImpl implements VacancyDAO {
     private static final Logger LOG = LoggerFactory.getLogger(VacancyDAOImpl.class);
-    private DataSource dataSource = DataSource.getInstance();
+    private DataSource dataSource = DataSource.INSTANCE;
 
     @Override
     public void add(Vacancy value) throws DAOException {

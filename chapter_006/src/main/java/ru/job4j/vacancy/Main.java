@@ -1,5 +1,6 @@
 package ru.job4j.vacancy;
 
+import ru.job4j.vacancy.dao.DataSource;
 import ru.job4j.vacancy.dao.PostgresFactory;
 import ru.job4j.vacancy.model.Vacancy;
 import ru.job4j.vacancy.utils.JobHandler;
@@ -23,14 +24,17 @@ public class Main {
     }
 
     private void start() {
+        PropertiesHolder.INSTANCE.init();
+        DataSource.INSTANCE.init();
+
         LinkedBlockingQueue<Vacancy> queueVacancy = new LinkedBlockingQueue<>();
 
-        JobHandler jobHandler = new JobHandler(queueVacancy, PostgresFactory.getInstance().getVacancyDAO());
+        JobHandler jobHandler = new JobHandler(queueVacancy, PostgresFactory.INSTANCE.getVacancyDAO());
         new Thread(jobHandler).start();
 
         JobParser jobParser = new JobParserSqlRu();
-        ParserTask parserTask = new ParserTask(jobParser, queueVacancy, PostgresFactory.getInstance().getVacancyDAO());
+        ParserTask parserTask = new ParserTask(jobParser, queueVacancy, PostgresFactory.INSTANCE.getVacancyDAO());
         Timer timer = new Timer();
-        timer.schedule(parserTask, 1, PropertiesHolder.getInstance().getRunTimeSchedule());
+        timer.schedule(parserTask, 1, PropertiesHolder.INSTANCE.getRunTimeSchedule());
     }
 }

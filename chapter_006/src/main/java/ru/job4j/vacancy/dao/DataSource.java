@@ -15,29 +15,22 @@ import java.util.Queue;
  * @author Stanislav (376825@mail.ru)
  * @since 02.01.2018
  */
-public final class DataSource {
+public enum DataSource {
+    INSTANCE;
+    private volatile boolean initialized = false;
     private volatile static DataSource instance;
     private boolean initializedTables = false;
     private final PoolingDataSource source =  new PoolingDataSource();
 
-    private DataSource() {
-        initPollConnection();
-    }
-
-    public static DataSource getInstance() {
-        if (instance == null) {
-            synchronized (DataSource.class) {
-                if (instance == null) {
-                    instance = new DataSource();
-                }
-            }
+    public synchronized void init() {
+        if (!initialized) {
+            initPollConnection();
+            initialized = true;
         }
-
-        return instance;
     }
 
     private void initPollConnection() {
-        PropertiesHolder propertiesHolder = PropertiesHolder.getInstance();
+        PropertiesHolder propertiesHolder = PropertiesHolder.INSTANCE;
         this.source.setMaxConnections(propertiesHolder.getMaxConnections());
         this.source.setServerName(propertiesHolder.getServerName());
         this.source.setPortNumber(propertiesHolder.getPortNumber());
@@ -48,7 +41,7 @@ public final class DataSource {
     }
 
     private void initTables() throws SQLException {
-        PropertiesHolder propertiesHolder = PropertiesHolder.getInstance();
+        PropertiesHolder propertiesHolder = PropertiesHolder.INSTANCE;
         Queue<String> scripts = propertiesHolder.getScripts();
 
         while (scripts.size() != 0) {
