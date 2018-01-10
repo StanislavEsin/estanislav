@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ru.job4j.crud_servlet.dao.DAOException;
 import ru.job4j.crud_servlet.dao.UserStore;
 import ru.job4j.crud_servlet.model.User;
+import ru.job4j.crud_servlet.utils.HibernateUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -140,5 +141,10 @@ public class UsersServlet extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(message);
         writer.flush();
+    }
+
+    @Override
+    public void destroy() {
+        HibernateUtil.shutdown();
     }
 }
