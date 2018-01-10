@@ -18,7 +18,6 @@ import java.util.Queue;
 public enum DataSource {
     INSTANCE;
     private volatile boolean initialized = false;
-    private volatile static DataSource instance;
     private boolean initializedTables = false;
     private final PoolingDataSource source =  new PoolingDataSource();
 

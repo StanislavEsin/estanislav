@@ -19,7 +19,7 @@ import java.util.Queue;
 public enum PropertiesHolder {
     INSTANCE;
     private volatile boolean initialized = false;
-    private static final Logger LOG = LoggerFactory.getLogger(JobHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesHolder.class);
     private Properties defaultProp;
     private int portNumber;
     private String serverName;
