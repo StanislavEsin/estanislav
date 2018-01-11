@@ -1,4 +1,20 @@
 <web-app>
+    <!--CharsetFilter start-->
+    <filter>
+        <filter-name>CharsetFilter</filter-name>
+        <filter-class>ru.job4j.servlet.services.CharsetFilter</filter-class>
+        <init-param>
+            <param-name>requestEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharsetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- services -->
     <servlet>
         <servlet-name>EchoServlet</servlet-name>
         <servlet-class>ru.job4j.services.EchoServlet</servlet-class>
@@ -9,6 +25,7 @@
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 
+    <!-- crud_servlet -->
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.job4j.crud_servlet.services.UsersServlet</servlet-class>
@@ -18,5 +35,47 @@
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
+    <!-- servlet -->
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.IndexServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.AddUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.DeleteUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.UpdateUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
 </web-app>
