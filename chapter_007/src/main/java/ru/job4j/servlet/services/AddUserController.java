@@ -16,13 +16,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
- * AddUserServlet.
+ * AddUserController.
  *
  * @author Stanislav (376825@mail.ru)
  * @since 11.01.2018
  */
-public class AddUserServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(AddUserServlet.class);
+public class AddUserController extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(AddUserController.class);
     private static final long serialVersionUID = 2771227506489679413L;
     private UserStore userStore = UserStore.getInstance();
 
@@ -40,6 +40,6 @@ public class AddUserServlet extends HttpServlet {
             LOG.error("Error adding user. ", e);
         }
 
-        resp.sendRedirect("/");
+        resp.sendRedirect(req.getContextPath().length() == 0 ? "/" : req.getContextPath());
     }
 }

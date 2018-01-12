@@ -14,18 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * DeleteUserServlet.
+ * DeleteUserController.
  *
  * @author Stanislav (376825@mail.ru)
  * @since 11.01.2018
  */
-public class DeleteUserServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(DeleteUserServlet.class);
+public class DeleteUserController extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(DeleteUserController.class);
     private static final long serialVersionUID = 3879293457880302897L;
     private UserStore userStore = UserStore.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(req.getContextPath());
         try {
             userStore.delete(Integer.valueOf(req.getParameter("id")));
         } catch (NumberFormatException e) {
@@ -34,6 +35,6 @@ public class DeleteUserServlet extends HttpServlet {
             LOG.error("Error while deleting user. ", e);
         }
 
-        resp.sendRedirect("/");
+        resp.sendRedirect(req.getContextPath().length() == 0 ? "/" : req.getContextPath());
     }
 }

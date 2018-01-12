@@ -15,56 +15,66 @@
     </filter-mapping>
 
     <!-- services -->
-    <servlet>
-        <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>ru.job4j.services.EchoServlet</servlet-class>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>EchoServlet</servlet-name>-->
+        <!--<servlet-class>ru.job4j.services.EchoServlet</servlet-class>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>EchoServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>EchoServlet</servlet-name>-->
+        <!--<url-pattern>/echo</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- crud_servlet -->
-    <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.crud_servlet.services.UsersServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>UsersServlet</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crud_servlet.services.UsersServlet</servlet-class>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>UsersServlet</servlet-name>-->
+        <!--<url-pattern>/users</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- servlet -->
     <servlet>
-        <servlet-name>AddUser</servlet-name>
-        <servlet-class>ru.job4j.servlet.services.AddUserServlet</servlet-class>
+        <servlet-name>Users views controller</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.UsersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AddUser</servlet-name>
-        <url-pattern>/add</url-pattern>
+        <servlet-name>Users views controller</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>ru.job4j.servlet.services.DeleteUserServlet</servlet-class>
+        <servlet-name>Add user controller</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.AddUserController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>DeleteUser</servlet-name>
-        <url-pattern>/delete</url-pattern>
+        <servlet-name>Add user controller</servlet-name>
+        <url-pattern>/addUser</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UpdateUser</servlet-name>
-        <servlet-class>ru.job4j.servlet.services.UpdateUserServlet</servlet-class>
+        <servlet-name>Update user controller</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.UpdateUserController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>UpdateUser</servlet-name>
-        <url-pattern>/update</url-pattern>
+        <servlet-name>Update user controller</servlet-name>
+        <url-pattern>/updateUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete user controller</servlet-name>
+        <servlet-class>ru.job4j.servlet.services.DeleteUserController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Delete user controller</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
     </servlet-mapping>
 </web-app>

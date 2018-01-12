@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * UpdateUserServlet.
+ * UpdateUserController.
  *
  * @author Stanislav (376825@mail.ru)
  * @since 11.01.2018
  */
-public class UpdateUserServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(UpdateUserServlet.class);
+public class UpdateUserController extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(UpdateUserController.class);
     private static final long serialVersionUID = 6328444530140780881L;
     private UserStore userStore = UserStore.getInstance();
 
@@ -53,6 +53,6 @@ public class UpdateUserServlet extends HttpServlet {
             LOG.error("Error adding user. ", e);
         }
 
-        resp.sendRedirect("/");
+        resp.sendRedirect(req.getContextPath().length() == 0 ? "/" : req.getContextPath());
     }
 }
