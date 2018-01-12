@@ -39,17 +39,6 @@
 
     <!-- servlet -->
     <servlet>
-        <servlet-name>Index</servlet-name>
-        <servlet-class>ru.job4j.servlet.services.IndexServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Index</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>AddUser</servlet-name>
         <servlet-class>ru.job4j.servlet.services.AddUserServlet</servlet-class>
     </servlet>
