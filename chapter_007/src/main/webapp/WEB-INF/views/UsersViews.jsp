@@ -15,9 +15,9 @@
             <p><b>Login:&nbsp</b><input name="login"></p>
             <p><b>E-mail:&nbsp</b><input name="email"></p>
         </form>
-        <button type='submit' form='data' formaction="/addUser" formmethod="post">Add</button>
-        <button type='submit' form='data' formaction="/updateUser" formmethod="post">Update</button>
-        <button type='submit' form='data' formaction="/deleteUser" formmethod="post">Delete</button>
+        <button type='submit' form='data' formaction="${requestScope.sessionContext.contextPath}/addUser" formmethod="post">Add</button>
+        <button type='submit' form='data' formaction="${requestScope.sessionContext.contextPath}/updateUser" formmethod="post">Update</button>
+        <button type='submit' form='data' formaction="${requestScope.sessionContext.contextPath}/deleteUser" formmethod="post">Delete</button>
         <br>
         <br>
         <b><h1>List of users in the database</h1></b>
