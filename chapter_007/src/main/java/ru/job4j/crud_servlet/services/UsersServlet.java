@@ -23,7 +23,12 @@ import java.time.LocalDateTime;
  */
 public class UsersServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
-    private final UserStore users = UserStore.getInstance();
+    private final UserStore users = UserStore.INSTANCE;
+
+    @Override
+    public void init() throws ServletException {
+        users.init();
+    }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

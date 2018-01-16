@@ -15,15 +15,11 @@ import java.util.Arrays;
  * @author Stanislav (376825@mail.ru)
  * @since 06.01.2018
  */
-public final class UserStore {
-    private static UserStore instance = new UserStore();
+public enum  UserStore {
+    INSTANCE;
 
-    private UserStore() {
+    public void init() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    }
-
-    public static UserStore getInstance() {
-        return instance;
     }
 
     public void createUser(User user) throws DAOException {
